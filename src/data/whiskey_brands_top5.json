@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Jack Daniel's",
+    "logo": "/public/logos/whiskey/whiskey-01.svg",
+    "rank": 1
+  },
+  {
+    "name": "Jim Beam",
+    "logo": "/public/logos/whiskey/whiskey-02.svg",
+    "rank": 2
+  },
+  {
+    "name": "Crown Royal",
+    "logo": "/public/logos/whiskey/whiskey-03.svg",
+    "rank": 3
+  },
+  {
+    "name": "Fireball",
+    "logo": "/public/logos/whiskey/whiskey-04.svg",
+    "rank": 4
+  },
+  {
+    "name": "Jameson",
+    "logo": "/public/logos/whiskey/whiskey-05.svg",
+    "rank": 5
+  }
+]
+

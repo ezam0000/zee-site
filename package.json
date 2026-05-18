@@ -1,0 +1,21 @@
+{
+  "name": "zee",
+  "version": "1.0.0",
+  "description": "Zee Design Studio Website",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve . -p 3000 --cors",
+    "dev": "npx serve . -p 3000 --cors",
+    "build": "echo 'No build step needed - static site'",
+    "version:update": "node update-version.js",
+    "version:timestamp": "node update-version.js $(date +%s)"
+  },
+  "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "gsap": "^3.12.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "serve": "^14.2.1"
+  }
+}

@@ -1,0 +1,205 @@
+
+Write
+Sign up
+Sign in
+
+
+Practical use of Cursor and MCP Playwright in test automation
+
+Denis Skvortsov
+Denis Skvortsov
+
+Follow
+7 min read
+·
+Apr 22, 2025
+18
+
+
+
+Press enter or click to view image in full size
+
+Introduction
+This article is not a documentation review. It’s my personal experience working with the Cursor and Playwright MCP tools for frontend test automation (JavaScript/TypeScript). I want to share how these tools truly help in everyday work, especially when it comes to writing or improving automated tests.
+The topic of automation is actively developing, and, perhaps in the near future, we will be able to automate tests almost by sheer willpower. But for now, I’ll share what I’ve already found. Many developers are actively using AI for code generation, such as GitHub Copilot, but for me, Cursor in combination with Playwright MCP provides much more context. While these are far from perfect tools-sometimes they fix unnecessary places or don’t work exactly as expected-they are still a powerful addition to the process.
+In this article, I will show how to use Cursor and Playwright MCP in practice, with test examples and explanations of where and how these tools help, as well as situations where they are better avoided.
+Here are the key points I would like to highlight in this article that may be useful when working with Cursor and MCP Playwright:
+Cursor can automatically add data-testid or getByRole to the code using a screenshot of the screen and highlighting the desired area where it should be inserted. This is especially useful for beginner automation engineers.
+MCP Playwright is useful for labeled pages, where elements have accessible attributes (e.g., data-testid, aria-label, etc.).
+MCP Playwright is ideal for writing simple scripts that do not require complex preconditions and works well for basic E2E testing.
+If you’re using Cursor and MCP Playwright together, the best solution is to organize a monorepository, where both the frontend and automated tests are located in one repository.
+Additionally, it’s important to remember that while these tools speed up the process, they do not replace engineering work, especially for more complex scenarios and integration tests.
+Test Architecture: Basic principles
+Before implementing MCP Playwright, it’s important to revisit your testing pyramid and define what e2e tests mean in your context. The testing pyramid can vary for different teams and projects. E2E and integration tests can overlap, but MCP Playwright is useful only for simple scenarios.
+Press enter or click to view image in full size
+
+My tests and examples will be based on the website google.com, and I will use TypeScript for writing the tests. Google provides good accessibility for element recognition through MCP Playwright, which allows easy creation of stable tests for basic operations, such as searching on the page. I will also use the test architecture from the article Simple and Effective E2E Test Architecture for Playwright.
+How MCP Playwright and Cursor fit different types of tests:
+E2E Tests: MCP Playwright is ideal for simple e2e tests where you need to check UI interactions, especially if the page is properly labeled. For example, checking a button or an input field. Here, MCP automatically generates code with the correct locators, making test writing easier. However, it’s important to remember that MCP Playwright works best with simple scenarios.
+Integration Tests: For integration tests where you need to interact with both the UI and the API, traditional automation methods are better. Cursor can help with generating templates and structuring mocks, but the logic of interacting between multiple modules and handling errors requires an engineering approach.
+Unit Tests: Unit tests remain the responsibility of developers, but for automation engineers, Cursor can be a useful tool for speeding up test creation, especially for typical cases.
+Example of using MCP Playwright in e2e tests
+Open Google
+Search for “Playwright MCP”
+Verify that the search results contain the text “Model Context Protocol”
+Open Google again
+Search for “Playwright automation”
+Verify that the search results contain the word “testing”
+Press enter or click to view image in full size
+
+This test interacts solely with the UI. For such simple scenarios, MCP Playwright will generate the necessary code, ensuring stable and fast test execution.
+Press enter or click to view image in full size
+
+Integration Tests: An AQA Engineer’s perspective
+When it comes to more complex integration tests, Cursor can provide a test template and a structure for mocks, but for complex logic, such as error handling or interaction between multiple modules, you need to apply engineering thinking.
+Example
+Cursor generated a test for a successful scenario, but it didn’t account for all the negative cases related to errors. I had to refine it manually, adding error handling:
+Press enter or click to view image in full size
+
+This is an example of how Cursor helps with templates, but you still need to tweak it for more complex scenarios. Also, Cursor tends to overcomplicate solutions, so it’s important to monitor what it generates and double-check its work.
+Get Denis Skvortsov’s stories in your inbox
+Join Medium for free to get updates from this writer.
+
+Subscribe
+Cursor works well in monorepositories and can reuse existing UI and API methods. To limit the complexity of the generated code, you can use Cursor rules. Cursor Rules Documentation.
+Of course, this is not a solution to all problems, but it can significantly simplify your work.
+Unit tests: How Cursor helps speed up test creation
+Unit tests are primarily the responsibility of developers, but as an automation engineer, you can also get involved, especially if you actively participate in writing code and understand its logic. Cursor helps generate tests quickly, saving time, especially for common cases.
+Example from Practice
+With Cursor, I generated several tests for functions like formatCurrency and parseQuery. Here’s an example of how it might look:
+Press enter or click to view image in full size
+
+Cursor suggested edge cases like null, NaN, and empty strings, which are often forgotten in tests. This saves time, eliminates human errors, and helps make tests more comprehensive.
+How to use Cursor to add data-testid or modify buttons on the frontend
+Cursor has a great feature for adding a screenshot of the page to a request, which is especially useful if you have a monorepository for both frontend and e2e tests. This is a great opportunity to immediately fix a component and label it in an accessible way while writing a script. Of course after making changes, you should verify the display, but this significantly simplifies the process for beginner automation engineers or those just getting familiar with the frontend.
+Press enter or click to view image in full size
+
+Monorepositories — A great solution for these tools
+Although I haven’t had the opportunity to work with these tools in a single monorepository where both frontend and backend are located, in practice, when all the automated tests are in the same repository as the frontend, this solution has proven to be excellent. Firstly, you can immediately label the necessary elements on the frontend, and with Cursor, you can quickly pull the required API request or examine how the frontend is structured overall.
+Using a monorepository in combination with these tools gives you flexibility and improves collaboration between teams, especially in terms of writing and maintaining tests.
+When to use MCP Playwright sensibly
+MCP Playwright is really good for testing interfaces when the page is properly labeled, and the scenarios are simple. It speeds up testing and eliminates the need to manually write locators.
+Use MCP Playwright if:
+The UI is properly labeled with accessibility attributes.
+The page being tested is simple: a form, a button, or a basic navigation.
+The test logic is as simple as possible.
+Don’t Use MCP Playwright if:
+The interface is custom, and the elements do not have accessible attributes.
+The test logic is complex, involving multiple interactions or APIs.
+You need to check internal values, not just the visual state.
+Conclusion
+MCP Playwright and Cursor are powerful tools that can significantly speed up test creation and help with routine tasks. However, they cannot replace the work of an engineer, especially in more complex scenarios.
+Cursor is excellent for generating test templates and working with common cases. It helps quickly set up the structure of tests but requires refinement for more complex scenarios, such as error handling or complex logic.
+MCP works perfectly when the page is properly labeled with accessibility attributes. It eliminates the need to manually write locators, speeding up the testing process. But if the elements on the page are dynamic or not properly labeled, MCP may not be as reliable, and you should consider using other methods for element search.
+In any case, while these tools significantly speed up testing, they do not replace full engineering work. It’s important to remember that for complex scenarios or integration tests, despite the convenience of these tools, you will still need manual intervention for correct logic setup.
+If you have already used MCP and Cursor in your projects, I’d be interested to hear how these tools helped you in real-world cases.
+Playwright Automation
+Llm
+Cursor
+E2e Testing
+Integration Testing
+18
+
+
+Denis Skvortsov
+Written by Denis Skvortsov
+13 followers
+·
+1 following
+
+Follow
+No responses yet
+
+Write a response
+What are your thoughts?
+Cancel
+Respond
+More from Denis Skvortsov
+A Simple and Effective E2E Test Architecture with Playwright and TypeScript
+Denis Skvortsov
+Denis Skvortsov
+A Simple and Effective E2E Test Architecture with Playwright and TypeScript
+In this article, we discussed an effective structure for E2E testing using TypeScript and Playwright. Key points:
+Jul 10, 2024
+10
+2
+Selective test execution mechanism with Playwright using GitHub Actions
+Denis Skvortsov
+Denis Skvortsov
+Selective test execution mechanism with Playwright using GitHub Actions
+Run only relevant Playwright tests in GitHub Actions based on code changes to speed up CI/CD
+May 25
+How to Integrate Databricks with Playwright and TypeScript via REST API
+Denis Skvortsov
+Denis Skvortsov
+How to Integrate Databricks with Playwright and TypeScript via REST API
+Integrating Databricks with Playwright & TypeScript via REST API — a simple and effective approach for e2e tests
+Feb 4
+See all from Denis Skvortsov
+Recommended from Medium
+Revolutionizing Test Automation: The Power of GenAI + Playwright MCP
+Japneet Sachdeva
+Japneet Sachdeva
+Revolutionizing Test Automation: The Power of GenAI + Playwright MCP
+In the rapidly evolving landscape of software development, quality assurance teams face an unprecedented challenge: delivering robust…
+
+Jul 15
+50
+2
+🪄 How I Built an AI Test Agent That Runs Playwright Tests Based on Jira Bug Reports
+Artificial Intelligence in Plain English
+In
+Artificial Intelligence in Plain English
+by
+Shahnawaz Khan
+🪄 How I Built an AI Test Agent That Runs Playwright Tests Based on Jira Bug Reports
+Let’s be real — we’ve all been there 😩
+
+Nov 10
+41
+4
+Playwright: My Secret for API and Web Testing
+Dinusha Somarathne
+Dinusha Somarathne
+Playwright: My Secret for API and Web Testing
+I’ve got to admit something: I used to dread testing. Clicking buttons, waiting for pages to load, checking API responses — it felt like a…
+
+Sep 28
+Your LLMs Context Window Is Not a Filing Cabinet. Cue: Claude Code Skills.
+Ashley Ha
+Ashley Ha
+Your LLMs Context Window Is Not a Filing Cabinet. Cue: Claude Code Skills.
+Less Preload, More Go: Why Claude Skills are the fix for your bloated context window.
+
+Nov 11
+41
+Using the Atlassian MCP server in Cursor
+JavaScript in Plain English
+In
+JavaScript in Plain English
+by
+Adam Drake
+Using the Atlassian MCP server in Cursor
+This article outlines how I use the Atlassian MCP server in Cursor in the real world. It’s not a miracle worker but a really useful tool.
+
+Jul 30
+15
+The QA Checklist for Using AI to Generate Test Cases (and Why Tools Like AgentQ AI Make It Easier)
+Niar
+Niar
+The QA Checklist for Using AI to Generate Test Cases (and Why Tools Like AgentQ AI Make It Easier)
+Original image by the author from Canva
+
+Sep 28
+36
+See more recommendations
+Help
+Status
+About
+Careers
+Press
+Blog
+Privacy
+Rules
+Terms
+Text to speech

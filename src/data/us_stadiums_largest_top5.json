@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Michigan Stadium",
+    "logo": "/public/logos/stadiums/stadium-01.svg",
+    "capacity": 107601,
+    "rank": 1
+  },
+  {
+    "name": "Beaver Stadium",
+    "logo": "/public/logos/stadiums/stadium-02.svg",
+    "capacity": 106572,
+    "rank": 2
+  },
+  {
+    "name": "Ohio Stadium",
+    "logo": "/public/logos/stadiums/stadium-03.svg",
+    "capacity": 102780,
+    "rank": 3
+  },
+  {
+    "name": "Kyle Field",
+    "logo": "/public/logos/stadiums/stadium-04.svg",
+    "capacity": 102733,
+    "rank": 4
+  },
+  {
+    "name": "Tiger Stadium",
+    "logo": "/public/logos/stadiums/stadium-05.svg",
+    "capacity": 102321,
+    "rank": 5
+  }
+]
+

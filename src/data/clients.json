@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Apple",
+    "logo": "/public/logos/clients/apple.svg",
+    "category": "tech"
+  },
+  {
+    "name": "Y Combinator",
+    "logo": "/public/logos/clients/ycombinator.svg",
+    "category": "tech"
+  },
+  {
+    "name": "Nike",
+    "logo": "/public/logos/clients/nike.svg",
+    "category": "sports"
+  },
+  {
+    "name": "UFC",
+    "logo": "/public/logos/clients/ufc.svg",
+    "category": "sports"
+  },
+  {
+    "name": "NBA",
+    "logo": "/public/logos/clients/nba.svg",
+    "category": "sports"
+  },
+  {
+    "name": "Coca-Cola",
+    "logo": "/public/logos/clients/coca-cola.svg",
+    "category": "consumer"
+  },
+  {
+    "name": "NHL",
+    "logo": "/public/logos/clients/nhl.svg",
+    "category": "sports"
+  },
+  {
+    "name": "MLB",
+    "logo": "/public/logos/clients/mlb.svg",
+    "category": "sports"
+  }
+]
+

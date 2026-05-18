@@ -1,0 +1,84 @@
+/* Desktop Styles - Only loaded on screens wider than 768px */
+
+/* Desktop Navigation */
+.nav-side {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--pad);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    z-index: 10;
+    border-right: 1px solid var(--c-line);
+    background: rgba(245, 243, 239, 0.8);
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+}
+
+.logo-vert {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+/* Desktop Hero */
+.hero-sec {
+    padding-left: calc(var(--pad) * 2.5);
+}
+
+.headline .indent {
+    margin-left: 12vw;
+}
+
+/* Desktop Capabilities */
+.capabilities-sec {
+    padding-left: calc(var(--pad) * 2.5);
+}
+
+.capability-tile {
+    padding: 6rem 5rem;
+}
+
+/* Desktop Clients Grid */
+.clients-sec {
+    padding-left: calc(var(--pad) * 2.5);
+}
+
+.client-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+/* Desktop Team */
+.team-sec {
+    padding-left: calc(var(--pad) * 2.5);
+    padding-right: var(--pad);
+}
+
+.team-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Desktop Address */
+.address-sec {
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+}
+
+.address-tile {
+    max-width: 600px;
+}
+
+/* Desktop Contact */
+.contact-sec {
+    padding-left: calc(var(--pad) * 2.5);
+    padding-right: calc(var(--pad) * 2.5);
+}
+
+.contact-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+}
+

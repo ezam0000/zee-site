@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Our Work - Zee Portfolio">
+  <title>Work - Zee</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js",
+        "@studio-freight/lenis": "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/+esm"
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/src/styles/base.css">
+  <link rel="stylesheet" href="/src/styles/layout.css">
+  <link rel="stylesheet" href="/src/styles/components/header.css">
+  <link rel="stylesheet" href="/src/styles/components/footer.css">
+  <link rel="stylesheet" href="/src/styles/components/case-grid.css">
+</head>
+<body data-page="work">
+  <div id="header-root"></div>
+
+  <main>
+    <section class="section" style="margin-top: 100px;">
+      <div class="container">
+        <h1 class="text-center">Our Work</h1>
+        <div id="case-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script type="module" src="/src/pages/work.js"></script>
+  <script type="module" src="/src/app/boot.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,81 @@
+/* =====================================================
+   DARK MODE - Desktop Specific Styles
+   Applies only on screens >= 769px
+   ===================================================== */
+
+@media (min-width: 769px) {
+    
+    /* Enhanced warm light for larger screens */
+    body.dark-mode::before {
+        height: 80vh;
+        background: radial-gradient(
+            ellipse 50% 35% at 50% -8%,
+            rgba(255, 200, 120, 0.18) 0%,
+            rgba(255, 180, 100, 0.10) 25%,
+            rgba(255, 160, 80, 0.04) 45%,
+            transparent 65%
+        );
+    }
+    
+    /* Navigation adjustments */
+    body.dark-mode .nav-side {
+        background: linear-gradient(
+            to right,
+            rgba(20, 20, 22, 0.95) 0%,
+            rgba(20, 20, 22, 0.8) 70%,
+            transparent 100%
+        );
+    }
+    
+    /* Hero section - larger typography glow */
+    body.dark-mode .hero-sec h1 {
+        text-shadow: 0 0 80px rgba(255, 200, 120, 0.08);
+    }
+    
+    body.dark-mode .capabilities-sec {
+        background: transparent;
+    }
+    
+    /* Client grid - desktop hover effects */
+    body.dark-mode .client-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    body.dark-mode .client-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    
+    
+    /* Contact form - wider inputs */
+    body.dark-mode .contact-input:hover {
+        border-color: rgba(245, 239, 230, 0.25);
+    }
+    
+    
+    /* Subtle vignette effect on desktop */
+    body.dark-mode::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            ellipse 80% 60% at 50% 50%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.15) 100%
+        );
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    /* Jelly switch - desktop positioning (matches main.css desktop) */
+    body.dark-mode .jelly-switch-container {
+        position: fixed !important;
+        top: 24px;
+        right: -30px;
+        z-index: 100;
+    }
+}
+

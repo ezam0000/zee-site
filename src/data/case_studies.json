@@ -1,0 +1,43 @@
+[
+  {
+    "slug": "apple-redesign",
+    "title": "Apple Store Redesign",
+    "client": "Apple",
+    "metrics": [
+      { "label": "Conversion Increase", "value": "38", "unit": "%" },
+      { "label": "Checkout Time", "value": "-22", "unit": "%" },
+      { "label": "User Satisfaction", "value": "94", "unit": "%" }
+    ],
+    "hero": {
+      "desktop": "/public/images/work/apple-redesign-hero.svg",
+      "mobile": "/public/images/work/apple-redesign-hero-mobile.svg",
+      "alt": "Apple Store redesign case study"
+    },
+    "thumbnail": "/public/images/work/apple-redesign-thumb.svg",
+    "gallery": [
+      "/public/images/work/apple-redesign-gallery/01.jpg",
+      "/public/images/work/apple-redesign-gallery/02.jpg"
+    ],
+    "description": "A comprehensive redesign of the Apple Store experience, focusing on conversion optimization and user satisfaction."
+  },
+  {
+    "slug": "nike-campaign",
+    "title": "Nike Digital Campaign",
+    "client": "Nike",
+    "metrics": [
+      { "label": "Engagement Rate", "value": "45", "unit": "%" },
+      { "label": "Click-Through Rate", "value": "12", "unit": "%" }
+    ],
+    "hero": {
+      "desktop": "/public/images/work/nike-campaign-hero.svg",
+      "mobile": "/public/images/work/nike-campaign-hero-mobile.svg",
+      "alt": "Nike digital campaign case study"
+    },
+    "thumbnail": "/public/images/work/nike-campaign-thumb.svg",
+    "gallery": [
+      "/public/images/work/nike-campaign-gallery/01.jpg"
+    ],
+    "description": "A digital campaign that increased engagement and click-through rates significantly."
+  }
+]
+

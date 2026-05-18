@@ -1,0 +1,297 @@
+/* =====================================================
+   DARK MODE - Night Version
+   Subtle dark background with cream text
+   Modular file for dark mode base styles
+   ===================================================== */
+
+/* Dark Mode CSS Variables */
+body.dark-mode {
+    --c-bg: #141416;
+    --c-bg-elevated: #1C1C1F;
+    --c-text: #F5EFE6;
+    --c-text-secondary: #C8C2B8;
+    --c-sub: #A09A8E;
+    --c-accent: #E8B86D;  /* Warm gold accent for night */
+    --c-line: rgba(245, 239, 230, 0.12);
+    --c-card-hover: #222226;
+    
+    /* Warm light glow */
+    --warm-light: radial-gradient(
+        ellipse 60% 40% at 50% -5%,
+        rgba(255, 200, 120, 0.15) 0%,
+        rgba(255, 180, 100, 0.08) 30%,
+        rgba(255, 160, 80, 0.03) 50%,
+        transparent 70%
+    );
+}
+
+/* Base dark mode styles */
+body.dark-mode {
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    transition: background-color 0.6s ease, color 0.5s ease;
+}
+
+/* Warm light source at center top */
+body.dark-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70vh;
+    background: var(--warm-light);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+/* Navigation */
+body.dark-mode .nav-side {
+    color: var(--c-text-secondary);
+    border-right-color: var(--c-line);
+}
+
+body.dark-mode .logo-vert {
+    color: var(--c-text);
+}
+
+/* Hero Section */
+body.dark-mode .hero-sec h1 {
+    color: var(--c-text);
+}
+
+body.dark-mode .hero-sec h1 em {
+    color: var(--c-accent);
+}
+
+/* Capabilities Section */
+body.dark-mode .capabilities-sec {
+    background: transparent;
+}
+
+body.dark-mode .capabilities-sec h2 {
+    color: var(--c-text);
+}
+
+body.dark-mode .capabilities-sec p {
+    color: var(--c-text-secondary);
+}
+
+/* Client Grid */
+body.dark-mode .client-grid {
+    border-top-color: var(--c-line);
+}
+
+body.dark-mode .client-grid-title {
+    color: var(--c-sub);
+}
+
+body.dark-mode .client-card {
+    border-color: var(--c-line);
+    background: transparent;
+}
+
+body.dark-mode .client-card:hover {
+    background: var(--c-card-hover);
+    border-color: rgba(245, 239, 230, 0.2);
+}
+
+body.dark-mode .client-card img {
+    filter: brightness(0.9) invert(1);
+    opacity: 0.75;
+}
+
+body.dark-mode .client-card:hover img {
+    opacity: 1;
+}
+
+body.dark-mode .client-name {
+    color: var(--c-text-secondary);
+}
+
+/* Client Cells - Grid items */
+body.dark-mode .client-cell {
+    background: var(--c-bg-elevated);
+    border: 1px solid var(--c-line);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .client-cell:hover {
+    background: var(--c-card-hover);
+    border-color: rgba(245, 239, 230, 0.2);
+}
+
+body.dark-mode .client-cell img {
+    filter: brightness(0.85) invert(1);
+    opacity: 0.8;
+}
+
+body.dark-mode .client-cell:hover img {
+    opacity: 1;
+    filter: brightness(0.9) invert(1);
+}
+
+body.dark-mode .client-cat {
+    color: var(--c-text-secondary);
+}
+
+body.dark-mode .logo-container .fallback-text {
+    color: var(--c-text);
+}
+
+/* Team Section - Glassmorphic tiles in dark mode */
+body.dark-mode .team-card img {
+    border-color: rgba(245, 239, 230, 0.15);
+}
+
+body.dark-mode .team-info {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(245, 239, 230, 0.15);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .team-info:hover {
+    background: rgba(0, 0, 0, 0.45);
+    border-color: rgba(245, 239, 230, 0.2);
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .team-info h3 {
+    color: var(--c-text);
+    font-family: var(--font-serif);
+}
+
+body.dark-mode .team-bio,
+body.dark-mode .team-info p {
+    color: var(--c-text-secondary);
+}
+
+/* Metal Door Covers in Dark Mode */
+body.dark-mode .team-sec.designers-hidden .team-card::after {
+    background-image: 
+        radial-gradient(circle at 85% 50%, rgba(232, 184, 109, 0.2) 0%, transparent 8%),
+        linear-gradient(
+            135deg,
+            #2a2a2e 0%,
+            #1f1f23 25%,
+            #1a1a1e 50%,
+            #1f1f23 75%,
+            #2a2a2e 100%
+        );
+    background-size: 200% 200%, 200% 200%;
+    box-shadow: 
+        inset 0 2px 4px rgba(232, 184, 109, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 1px 2px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(245, 239, 230, 0.15);
+}
+
+body.dark-mode .team-sec.designers-hidden .team-card::before {
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(232, 184, 109, 0.05) 2px,
+            rgba(232, 184, 109, 0.05) 4px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px
+        );
+    opacity: 0.5;
+}
+
+/* Address Section - matches light mode styling */
+
+/* Contact Section */
+body.dark-mode .contact-sec {
+    background: #2A2824;
+    border-top-color: var(--c-line);
+}
+
+body.dark-mode .contact-label {
+    color: var(--c-sub);
+}
+
+body.dark-mode .contact-sec h2 {
+    color: var(--c-text);
+}
+
+body.dark-mode .contact-input {
+    background: var(--c-bg-elevated);
+    border-color: var(--c-line);
+    color: var(--c-text);
+}
+
+body.dark-mode .contact-input::placeholder {
+    color: var(--c-sub);
+}
+
+body.dark-mode .contact-input:focus {
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 2px rgba(232, 184, 109, 0.15);
+}
+
+body.dark-mode .submit-btn {
+    background: transparent;
+    border: 2px solid var(--c-text);
+    color: var(--c-text);
+}
+
+body.dark-mode .submit-btn:hover {
+    background: var(--c-text);
+    border-color: var(--c-text);
+    color: #2A2824;
+}
+
+/* Jelly Switch in dark mode - keep position, add subtle glow */
+body.dark-mode .jelly-switch-container {
+    position: fixed !important;
+    top: 20px;
+    right: -30px;
+    z-index: 100;
+    filter: drop-shadow(0 0 8px rgba(255, 200, 120, 0.2));
+}
+
+/* Smooth transitions for all elements */
+body.dark-mode * {
+    transition: background-color 0.4s ease, 
+                color 0.4s ease, 
+                border-color 0.4s ease,
+                filter 0.4s ease;
+}
+
+/* Z-index layering for dark mode (no position changes to avoid layout shifts) */
+body.dark-mode #hero-liquid {
+    z-index: 0;
+}
+
+body.dark-mode .nav-side {
+    z-index: 50;
+}
+
+body.dark-mode #smooth-wrapper {
+    z-index: 1;
+}
+
+/* Keep jelly switch fixed in exact same position */
+body.dark-mode .jelly-switch-container {
+    position: fixed;
+    top: 20px;
+    right: -30px;
+    z-index: 100;
+}
+

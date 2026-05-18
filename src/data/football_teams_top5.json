@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Dallas Cowboys",
+    "logo": "/public/logos/football/team-01.svg",
+    "rank": 1
+  },
+  {
+    "name": "New England Patriots",
+    "logo": "/public/logos/football/team-02.svg",
+    "rank": 2
+  },
+  {
+    "name": "Green Bay Packers",
+    "logo": "/public/logos/football/team-03.svg",
+    "rank": 3
+  },
+  {
+    "name": "Pittsburgh Steelers",
+    "logo": "/public/logos/football/team-04.svg",
+    "rank": 4
+  },
+  {
+    "name": "San Francisco 49ers",
+    "logo": "/public/logos/football/team-05.svg",
+    "rank": 5
+  }
+]
+

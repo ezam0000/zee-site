@@ -1,0 +1,83 @@
+/* =====================================================
+   DARK MODE - Mobile Specific Styles
+   Applies only on screens < 769px
+   ===================================================== */
+
+@media (max-width: 768px) {
+    
+    /* Jelly switch - fixed top right on mobile */
+    body.dark-mode .jelly-switch-container {
+        position: fixed !important;
+        top: 70px !important;
+        right: -70px !important;
+        left: auto !important;
+        bottom: auto !important;
+        z-index: 9999 !important;
+        filter: drop-shadow(0 0 6px rgba(255, 200, 120, 0.15));
+    }
+    
+    /* Adjusted warm light for mobile - more concentrated */
+    body.dark-mode::before {
+        height: 50vh;
+        background: radial-gradient(
+            ellipse 80% 50% at 50% -10%,
+            rgba(255, 200, 120, 0.12) 0%,
+            rgba(255, 180, 100, 0.06) 35%,
+            transparent 60%
+        );
+    }
+    
+    /* Navigation - full width on mobile */
+    body.dark-mode .nav-side {
+        background: rgba(20, 20, 22, 0.98);
+        border-right: none;
+        border-bottom: 1px solid var(--c-line);
+    }
+    
+    /* Hero section - adjusted for mobile */
+    body.dark-mode .hero-sec h1 {
+        text-shadow: 0 0 40px rgba(255, 200, 120, 0.06);
+    }
+    
+    /* Capabilities section - transparent like desktop */
+    body.dark-mode .capabilities-sec {
+        background: transparent !important;
+    }
+    
+    /* Client grid - stacked layout */
+    body.dark-mode .client-card {
+        background: var(--c-bg-elevated);
+    }
+    
+    body.dark-mode .client-card:active {
+        background: var(--c-card-hover);
+    }
+    
+    
+    /* Contact form - full width */
+    body.dark-mode .contact-input {
+        background: var(--c-bg-elevated);
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    body.dark-mode .contact-input:focus {
+        background: var(--c-card-hover);
+    }
+    
+    /* Submit button - larger touch target */
+    body.dark-mode .submit-btn {
+        padding: 16px 32px;
+    }
+    
+    body.dark-mode .submit-btn:active {
+        background: var(--c-accent);
+        color: var(--c-bg);
+    }
+    
+    
+    /* Reduce vignette on mobile for better visibility */
+    body.dark-mode::after {
+        display: none;
+    }
+}
+
