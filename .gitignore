@@ -29,6 +29,7 @@ lerna-debug.log*
 /blob-report/
 /playwright/.cache/
 .playwright-mcp/
+using_playwright-mcp.txt
 
 # Stray screenshots at repo root (site assets live under public/)
 /*.png
