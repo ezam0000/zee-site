@@ -4,22 +4,49 @@ const projects = [
         bridge: 'a reprogrammed gummy line and visual world for Grön.',
         brand: 'Grön — PIXLZ',
         image: '/public/images/work/gron-pixlz-blue-razzberry.webp',
-        link: 'https://www.eatpixlz.com/',
         fit: 'contain',
     },
     {
         opener: 'A LIMITED EDITION BOX SET',
         bridge: 'for the world\u2019s oldest tequila house.',
         brand: 'Jose Cuervo',
-        image: '/public/images/work/jose-cuervo.jpg',
-        link: 'https://www.behance.net/gallery/196569875/Jose-Cuervo-Box-Set',
+        image: '/public/images/work/jose_cuervo.png',
+        fit: 'contain',
     },
     {
         opener: 'A COLLECTOR\u2019S BOX SET',
         bridge: 'that turns whiskey into a tactile object.',
         brand: 'American Metal Whiskey',
-        image: '/public/images/work/american-metal.jpg',
-        link: 'https://www.behance.net/gallery/196569815/American-Metal-Whiskey-Box-Set',
+        image: '/public/images/work/american_metal.png',
+        fit: 'contain',
+    },
+    {
+        opener: 'A 100TH ANNIVERSARY BOX',
+        bridge: 'for Coca-Cola \u00D7 Ohio State.',
+        brand: 'Coca-Cola \u00D7 Ohio State',
+        image: '/public/images/work/coca-cola.png',
+        fit: 'contain',
+    },
+    {
+        opener: 'A JUNMAI GINJO BOX SET',
+        bridge: 'for WE SAKE.',
+        brand: 'WE SAKE',
+        image: '/public/images/work/we_sake.png',
+        fit: 'contain',
+    },
+    {
+        opener: 'ZIPPO LIGHTERS',
+        bridge: 'skinned for football and baseball teams.',
+        brand: 'Zippo \u2014 NFL \u00B7 MLB',
+        image: '/public/images/work/nfl_mlb_lighers.png',
+        fit: 'contain',
+    },
+    {
+        opener: 'CUSTOM STADIUM WALL ART',
+        bridge: 'for SoFi.',
+        brand: 'SoFi',
+        image: '/public/images/work/sofi.png',
+        fit: 'contain',
     },
 ];
 
@@ -28,11 +55,8 @@ export function initSelectedWork() {
     if (!grid) return;
 
     projects.forEach((project) => {
-        const tile = document.createElement('a');
+        const tile = document.createElement('article');
         tile.className = 'featured-tile';
-        tile.href = project.link;
-        tile.target = '_blank';
-        tile.rel = 'noopener noreferrer';
         const fitClass = project.fit === 'contain' ? ' featured-image--contain' : '';
         tile.innerHTML = `
             <div class="featured-image${fitClass}">

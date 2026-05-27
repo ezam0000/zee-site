@@ -41,6 +41,9 @@
 
 .featured-list {
     max-width: 1200px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+    row-gap: 6rem;
 }
 
 .featured-image {
