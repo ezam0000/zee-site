@@ -25,10 +25,8 @@ function syncHeroLiquidBackground() {
     setHeroLiquidBackground(getHeroLiquidImageUrl(), getPageBackgroundColor());
 }
 
-const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-if (savedDarkMode) {
-    document.body.classList.add('dark-mode');
-}
+const savedDarkMode = localStorage.getItem('darkMode') !== 'false';
+document.body.classList.toggle('dark-mode', savedDarkMode);
 
 let heroLiquidActive = false;
 const heroLiquidContainer = document.querySelector('#hero-liquid');
