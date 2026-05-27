@@ -39,41 +39,11 @@
         text-shadow: 0 0 40px rgba(255, 200, 120, 0.06);
     }
     
-    /* Capabilities section - transparent like desktop */
-    body.dark-mode .capabilities-sec {
-        background: transparent !important;
+    /* Information form - prevent iOS zoom on focus */
+    body.dark-mode .info-form input,
+    body.dark-mode .info-form textarea {
+        font-size: 16px;
     }
-    
-    /* Client grid - stacked layout */
-    body.dark-mode .client-card {
-        background: var(--c-bg-elevated);
-    }
-    
-    body.dark-mode .client-card:active {
-        background: var(--c-card-hover);
-    }
-    
-    
-    /* Contact form - full width */
-    body.dark-mode .contact-input {
-        background: var(--c-bg-elevated);
-        font-size: 16px; /* Prevent zoom on iOS */
-    }
-    
-    body.dark-mode .contact-input:focus {
-        background: var(--c-card-hover);
-    }
-    
-    /* Submit button - larger touch target */
-    body.dark-mode .submit-btn {
-        padding: 16px 32px;
-    }
-    
-    body.dark-mode .submit-btn:active {
-        background: var(--c-accent);
-        color: var(--c-bg);
-    }
-    
     
     /* Reduce vignette on mobile for better visibility */
     body.dark-mode::after {

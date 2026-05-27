@@ -13,32 +13,31 @@ test.describe('Zee Homepage', () => {
   test('should display hero section', async ({ page }) => {
     const headline = page.locator('.headline');
     await expect(headline).toBeVisible();
-    await expect(headline).toContainText('We design for');
+    await expect(headline).toContainText('Design for things');
   });
 
-  test('should load client logos', async ({ page }) => {
+  test('should list selected clients', async ({ page }) => {
     const clientGrid = page.locator('#client-grid');
     await expect(clientGrid).toBeVisible();
-    
-    // Check for at least some client logos
-    const logos = page.locator('#client-grid img');
-    const count = await logos.count();
+
+    const items = page.locator('#client-grid li');
+    const count = await items.count();
     expect(count).toBeGreaterThan(0);
   });
 
-  test('should display capabilities section', async ({ page }) => {
-    const capabilitiesSec = page.locator('.capabilities-sec');
-    await expect(capabilitiesSec).toBeVisible();
-    
-    const tile = page.locator('.capability-tile');
-    await expect(tile).toBeVisible();
+  test('should display featured work section', async ({ page }) => {
+    const featuredSec = page.locator('.featured-sec');
+    await expect(featuredSec).toBeVisible();
+
+    const tiles = page.locator('.featured-tile');
+    const count = await tiles.count();
+    expect(count).toBeGreaterThan(0);
   });
 
-  test('should display capability details', async ({ page }) => {
-    const tile = page.locator('.capability-tile');
-    await expect(tile).toBeVisible();
-    await expect(tile).toContainText('data-driven design');
-    await expect(tile).toContainText('web and print');
+  test('should display information section', async ({ page }) => {
+    const infoSec = page.locator('.info-sec');
+    await expect(infoSec).toBeVisible();
+    await expect(infoSec).toContainText('Senior designer');
   });
 
   test('should include hero liquid background canvas', async ({ page }) => {

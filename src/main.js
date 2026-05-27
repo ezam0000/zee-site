@@ -3,7 +3,7 @@ import { initHotjar } from './analytics/hotjar.js';
 import { env } from './app/env.js';
 import { config } from './app/config.js';
 import { handleFormSubmission } from './utils/formHandler.js';
-import { initClientGrid } from './components/ClientGrid.js';
+import { initSelectedWork } from './components/SelectedWork.js';
 import {
     init as initHeroLiquid,
     setBackgroundImage as setHeroLiquidBackground,
@@ -90,19 +90,11 @@ import('@studio-freight/lenis').then((module) => {
     requestAnimationFrame(raf);
 });
 
-// Initialize Client Grid
-initClientGrid();
+// Initialize Selected Work
+initSelectedWork();
 
 // Initialize Contact Form
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     handleFormSubmission(contactForm);
-}
-
-// Apply designers cover if enabled
-if (config.hideDesigners) {
-    const teamSection = document.querySelector('.team-sec');
-    if (teamSection) {
-        teamSection.classList.add('designers-hidden');
-    }
 }

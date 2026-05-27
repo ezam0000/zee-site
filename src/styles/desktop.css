@@ -33,52 +33,35 @@
     margin-left: 12vw;
 }
 
-/* Desktop Capabilities */
-.capabilities-sec {
+/* Desktop Featured Work */
+.featured-sec {
     padding-left: calc(var(--pad) * 2.5);
+    padding-right: var(--pad);
 }
 
-.capability-tile {
-    padding: 6rem 5rem;
+.featured-list {
+    max-width: 1200px;
 }
 
-/* Desktop Clients Grid */
+.featured-image {
+    aspect-ratio: 16 / 10;
+}
+
+/* Desktop Selected Clients */
 .clients-sec {
     padding-left: calc(var(--pad) * 2.5);
-}
-
-.client-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-}
-
-/* Desktop Team */
-.team-sec {
-    padding-left: calc(var(--pad) * 2.5);
     padding-right: var(--pad);
 }
 
-.team-grid {
-    grid-template-columns: repeat(4, 1fr);
+.clients-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem 2.5rem;
+    max-width: 1100px;
 }
 
-/* Desktop Address */
-.address-sec {
-    padding-left: var(--pad);
-    padding-right: var(--pad);
-}
-
-.address-tile {
-    max-width: 600px;
-}
-
-/* Desktop Contact */
-.contact-sec {
+/* Desktop Information */
+.info-sec {
     padding-left: calc(var(--pad) * 2.5);
-    padding-right: calc(var(--pad) * 2.5);
-}
-
-.contact-layout {
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    padding-right: var(--pad);
 }
 

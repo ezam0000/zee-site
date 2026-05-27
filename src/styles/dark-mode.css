@@ -66,195 +66,50 @@ body.dark-mode .hero-sec h1 em {
     color: var(--c-accent);
 }
 
-/* Capabilities Section */
-body.dark-mode .capabilities-sec {
+/* Featured Work */
+body.dark-mode .featured-image {
     background: transparent;
 }
 
-body.dark-mode .capabilities-sec h2 {
+body.dark-mode .featured-lede {
     color: var(--c-text);
+    mix-blend-mode: screen;
 }
 
-body.dark-mode .capabilities-sec p {
+body.dark-mode .featured-brand {
     color: var(--c-text-secondary);
 }
 
-/* Client Grid */
-body.dark-mode .client-grid {
-    border-top-color: var(--c-line);
+/* Selected Clients */
+body.dark-mode .clients-list {
+    color: var(--c-text);
+    mix-blend-mode: screen;
 }
 
-body.dark-mode .client-grid-title {
-    color: var(--c-sub);
+/* Information */
+body.dark-mode .info-bio {
+    color: var(--c-text);
+    mix-blend-mode: screen;
 }
 
-body.dark-mode .client-card {
-    border-color: var(--c-line);
-    background: transparent;
-}
-
-body.dark-mode .client-card:hover {
-    background: var(--c-card-hover);
-    border-color: rgba(245, 239, 230, 0.2);
-}
-
-body.dark-mode .client-card img {
-    filter: brightness(0.9) invert(1);
-    opacity: 0.75;
-}
-
-body.dark-mode .client-card:hover img {
-    opacity: 1;
-}
-
-body.dark-mode .client-name {
+body.dark-mode .info-field-label {
     color: var(--c-text-secondary);
 }
 
-/* Client Cells - Grid items */
-body.dark-mode .client-cell {
-    background: var(--c-bg-elevated);
-    border: 1px solid var(--c-line);
-    transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-body.dark-mode .client-cell:hover {
-    background: var(--c-card-hover);
-    border-color: rgba(245, 239, 230, 0.2);
-}
-
-body.dark-mode .client-cell img {
-    filter: brightness(0.85) invert(1);
-    opacity: 0.8;
-}
-
-body.dark-mode .client-cell:hover img {
-    opacity: 1;
-    filter: brightness(0.9) invert(1);
-}
-
-body.dark-mode .client-cat {
-    color: var(--c-text-secondary);
-}
-
-body.dark-mode .logo-container .fallback-text {
+body.dark-mode .info-form input,
+body.dark-mode .info-form textarea {
     color: var(--c-text);
+    border-bottom-color: var(--c-line);
 }
 
-/* Team Section - Glassmorphic tiles in dark mode */
-body.dark-mode .team-card img {
-    border-color: rgba(245, 239, 230, 0.15);
+body.dark-mode .info-form input:focus,
+body.dark-mode .info-form textarea:focus {
+    border-bottom-color: var(--c-accent);
 }
 
-body.dark-mode .team-info {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(245, 239, 230, 0.15);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .team-info:hover {
-    background: rgba(0, 0, 0, 0.45);
-    border-color: rgba(245, 239, 230, 0.2);
-    box-shadow: 
-        0 16px 48px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-body.dark-mode .team-info h3 {
+body.dark-mode .info-submit {
     color: var(--c-text);
-    font-family: var(--font-serif);
-}
-
-body.dark-mode .team-bio,
-body.dark-mode .team-info p {
-    color: var(--c-text-secondary);
-}
-
-/* Metal Door Covers in Dark Mode */
-body.dark-mode .team-sec.designers-hidden .team-card::after {
-    background-image: 
-        radial-gradient(circle at 85% 50%, rgba(232, 184, 109, 0.2) 0%, transparent 8%),
-        linear-gradient(
-            135deg,
-            #2a2a2e 0%,
-            #1f1f23 25%,
-            #1a1a1e 50%,
-            #1f1f23 75%,
-            #2a2a2e 100%
-        );
-    background-size: 200% 200%, 200% 200%;
-    box-shadow: 
-        inset 0 2px 4px rgba(232, 184, 109, 0.1),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.5),
-        0 4px 12px rgba(0, 0, 0, 0.4),
-        0 1px 2px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(245, 239, 230, 0.15);
-}
-
-body.dark-mode .team-sec.designers-hidden .team-card::before {
-    background-image: 
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(232, 184, 109, 0.05) 2px,
-            rgba(232, 184, 109, 0.05) 4px
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 0, 0, 0.1) 2px,
-            rgba(0, 0, 0, 0.1) 4px
-        );
-    opacity: 0.5;
-}
-
-/* Address Section - matches light mode styling */
-
-/* Contact Section */
-body.dark-mode .contact-sec {
-    background: #2A2824;
-    border-top-color: var(--c-line);
-}
-
-body.dark-mode .contact-label {
-    color: var(--c-sub);
-}
-
-body.dark-mode .contact-sec h2 {
-    color: var(--c-text);
-}
-
-body.dark-mode .contact-input {
-    background: var(--c-bg-elevated);
-    border-color: var(--c-line);
-    color: var(--c-text);
-}
-
-body.dark-mode .contact-input::placeholder {
-    color: var(--c-sub);
-}
-
-body.dark-mode .contact-input:focus {
-    border-color: var(--c-accent);
-    box-shadow: 0 0 0 2px rgba(232, 184, 109, 0.15);
-}
-
-body.dark-mode .submit-btn {
-    background: transparent;
-    border: 2px solid var(--c-text);
-    color: var(--c-text);
-}
-
-body.dark-mode .submit-btn:hover {
-    background: var(--c-text);
-    border-color: var(--c-text);
-    color: #2A2824;
+    border-bottom-color: var(--c-text);
 }
 
 /* Jelly Switch in dark mode - keep position, add subtle glow */
