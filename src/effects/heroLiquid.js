@@ -3,7 +3,7 @@
  * WebGL2 wave simulation — refracts a background image on cursor movement.
  */
 
-const DEFAULT_BG = "#E8E6E2";
+const DEFAULT_BG = "#FFFFFF";
 
 /** Canvas with subtle variation so refraction is visible on flat page colors. */
 export function createBackgroundCanvas(color) {

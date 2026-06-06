@@ -5,38 +5,26 @@
 
 @media (max-width: 768px) {
     
-    /* Jelly switch - fixed top right on mobile */
-    body.dark-mode .jelly-switch-container {
-        position: fixed !important;
-        top: 70px !important;
-        right: -70px !important;
-        left: auto !important;
-        bottom: auto !important;
-        z-index: 9999 !important;
-        filter: drop-shadow(0 0 6px rgba(255, 200, 120, 0.15));
-    }
-    
-    /* Adjusted warm light for mobile - more concentrated */
+    /* Cool ambient light for mobile */
     body.dark-mode::before {
         height: 50vh;
         background: radial-gradient(
             ellipse 80% 50% at 50% -10%,
-            rgba(255, 200, 120, 0.12) 0%,
-            rgba(255, 180, 100, 0.06) 35%,
+            rgba(160, 175, 195, 0.06) 0%,
+            rgba(130, 145, 165, 0.03) 35%,
             transparent 60%
         );
     }
     
     /* Navigation - full width on mobile */
     body.dark-mode .nav-side {
-        background: rgba(20, 20, 22, 0.98);
         border-right: none;
-        border-bottom: 1px solid var(--c-line);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     }
     
     /* Hero section - adjusted for mobile */
     body.dark-mode .hero-sec h1 {
-        text-shadow: 0 0 40px rgba(255, 200, 120, 0.06);
+        text-shadow: 0 0 40px rgba(160, 175, 195, 0.04);
     }
     
     /* Information form - prevent iOS zoom on focus */

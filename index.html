@@ -36,7 +36,7 @@
     <meta name="twitter:image:alt" content="Zee Pauli — Packaging & Brand Design">
     
     <!-- Additional SEO -->
-    <meta name="theme-color" content="#E8E6E2">
+    <meta name="theme-color" content="#FFFFFF">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -111,15 +111,67 @@
 </head>
 <body class="dark-mode">
     <div id="hero-liquid" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
 
-    <!-- Jelly Switch - Top Right, Vertical -->
-    <div class="jelly-switch-container">
-        <canvas id="jelly-switch-canvas" width="600" height="300"></canvas>
+    <div class="floating-leaf" aria-hidden="true">
+        <img
+            class="floating-leaf__img"
+            src="/public/images/floating-leaf.png"
+            alt=""
+            width="160"
+            height="160"
+            decoding="async"
+        >
+    </div>
+
+    <!-- Theme Switch -->
+    <div class="theme-switch-container">
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle" class="theme-switch__input" aria-label="Toggle light mode">
+            <span class="theme-switch__track">
+                <span class="theme-switch__knob"></span>
+                <span class="theme-switch__icon theme-switch__icon--sun" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="4.25" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M12 3v2.25M12 18.75V21M3 12h2.25M18.75 12H21M5.11 5.11l1.59 1.59M17.3 17.3l1.59 1.59M5.11 18.89l1.59-1.59M17.3 6.7l1.59-1.59" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <span class="theme-switch__icon theme-switch__icon--moon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </span>
+        </label>
     </div>
 
     <!-- Vertical Nav -->
     <nav class="nav-side">
-        <div class="logo-vert">Zee Pauli</div>
+        <div class="nav-brand">
+            <div class="logo-vert">Zee Pauli</div>
+        </div>
+        <div class="nav-social">
+            <a class="nav-social__link" href="https://www.linkedin.com/in/zeepauli" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-13h4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+            </a>
+            <a class="nav-social__link" href="https://www.instagram.com/zeepauli" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                </svg>
+            </a>
+            <a class="nav-social__link" href="mailto:hello@zee-studio.com" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
     </nav>
 
     <div id="smooth-wrapper">
@@ -127,74 +179,25 @@
             
             <!-- Hero: Simple, Bold Statement -->
             <section class="hero-sec">
-                <div class="hero-main">
-                    <h1 class="headline">
-                        Design for things
-                        <span class="indent">people use, share, and remember.</span>
-                    </h1>
-                </div>
-            </section>
-
-            <!-- Featured Work -->
-            <section class="featured-sec">
-                <div class="sec-label">FEATURED</div>
-                <div class="featured-list" id="work-grid">
-                    <!-- Injected by JS -->
-                </div>
-            </section>
-
-            <!-- Selected Clients -->
-            <section class="clients-sec">
-                <div class="sec-label">SELECTED CLIENTS</div>
-                <ul class="clients-list" id="client-grid">
-                    <li>Allegiant Stadium</li>
-                    <li>Amazon</li>
-                    <li>Apple</li>
-                    <li>Chicago Bulls</li>
-                    <li>Coca-Cola</li>
-                    <li>Dallas Cowboys</li>
-                    <li>Google</li>
-                    <li>Grön</li>
-                    <li>Inter Miami</li>
-                    <li>Jack Daniel's</li>
-                    <li>Jameson</li>
-                    <li>Jim Beam</li>
-                    <li>Major League Baseball</li>
-                    <li>Meta</li>
-                    <li>Michigan Stadium</li>
-                    <li>National Basketball Association</li>
-                    <li>National Hockey League</li>
-                    <li>New England Patriots</li>
-                    <li>Nike</li>
-                    <li>Penn State Athletics</li>
-                    <li>Pittsburgh Steelers</li>
-                    <li>SoFi Stadium</li>
-                    <li>Spotify</li>
-                    <li>Ultimate Fighting Championship</li>
-                    <li>Y Combinator</li>
-                </ul>
-            </section>
-
-            <!-- Information -->
-            <section class="info-sec">
-                <div class="sec-label">INFORMATION</div>
-                <div class="info-content">
-                    <p class="info-bio">Senior designer based in Portland, Oregon. Lead designer at Grön, with a body of work spanning packaging, brand systems, and physical production for spirits, CPG, and cannabis brands. Currently exploring product design for apps.</p>
-                    <form class="info-form" id="contact-form">
-                        <label class="info-field">
-                            <span class="info-field-label">Name</span>
-                            <input type="text" name="name" required>
-                        </label>
-                        <label class="info-field">
-                            <span class="info-field-label">Email</span>
-                            <input type="email" name="email" required>
-                        </label>
-                        <label class="info-field">
-                            <span class="info-field-label">Project</span>
-                            <textarea name="message" rows="3" required></textarea>
-                        </label>
-                        <button type="submit" class="info-submit">Send <span aria-hidden="true">&rarr;</span></button>
-                    </form>
+                <div class="hero-sticky">
+                    <div class="hero-main">
+                        <div class="hero-headlines">
+                            <h1 class="headline headline--hero">
+                                <span class="headline__static">Design for</span>
+                                <span class="headline__swap" aria-live="polite">
+                                    <span class="headline__sizer" aria-hidden="true">remembering</span>
+                                    <span class="headline__word is-settled">feeling</span>
+                                    <span class="headline__word">sharing</span>
+                                    <span class="headline__word">remembering</span>
+                                </span>
+                            </h1>
+                        </div>
+                    </div>
+                    <nav class="hero-portfolio-links" aria-label="Portfolio">
+                        <a href="/branding/" class="hero-portfolio-link">branding</a>
+                        <a href="/packaging/" class="hero-portfolio-link">packaging</a>
+                        <a href="/experience/" class="hero-portfolio-link">experience</a>
+                    </nav>
                 </div>
             </section>
 

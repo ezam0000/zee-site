@@ -1,5 +1,6 @@
-const projects = [
+export const projects = [
     {
+        category: 'branding',
         opener: 'PIXLZ',
         bridge: 'a reprogrammed gummy line and visual world for Grön.',
         brand: 'Grön — PIXLZ',
@@ -7,20 +8,7 @@ const projects = [
         fit: 'contain',
     },
     {
-        opener: 'A LIMITED EDITION BOX SET',
-        bridge: 'for the world\u2019s oldest tequila house.',
-        brand: 'Jose Cuervo',
-        image: '/public/images/work/jose_cuervo.png',
-        fit: 'contain',
-    },
-    {
-        opener: 'A COLLECTOR\u2019S BOX SET',
-        bridge: 'that turns whiskey into a tactile object.',
-        brand: 'American Metal Whiskey',
-        image: '/public/images/work/american_metal.png',
-        fit: 'contain',
-    },
-    {
+        category: 'branding',
         opener: 'A 100TH ANNIVERSARY BOX',
         bridge: 'for Coca-Cola \u00D7 Ohio State.',
         brand: 'Coca-Cola \u00D7 Ohio State',
@@ -28,6 +16,23 @@ const projects = [
         fit: 'contain',
     },
     {
+        category: 'packaging',
+        opener: 'A LIMITED EDITION BOX SET',
+        bridge: 'for the world\u2019s oldest tequila house.',
+        brand: 'Jose Cuervo',
+        image: '/public/images/work/jose_cuervo.png',
+        fit: 'contain',
+    },
+    {
+        category: 'packaging',
+        opener: 'A COLLECTOR\u2019S BOX SET',
+        bridge: 'that turns whiskey into a tactile object.',
+        brand: 'American Metal Whiskey',
+        image: '/public/images/work/american_metal.png',
+        fit: 'contain',
+    },
+    {
+        category: 'packaging',
         opener: 'A JUNMAI GINJO BOX SET',
         bridge: 'for WE SAKE.',
         brand: 'WE SAKE',
@@ -35,6 +40,7 @@ const projects = [
         fit: 'contain',
     },
     {
+        category: 'experience',
         opener: 'ZIPPO LIGHTERS',
         bridge: 'skinned for football and baseball teams.',
         brand: 'Zippo \u2014 NFL \u00B7 MLB',
@@ -42,6 +48,7 @@ const projects = [
         fit: 'contain',
     },
     {
+        category: 'experience',
         opener: 'CUSTOM STADIUM WALL ART',
         bridge: 'for SoFi.',
         brand: 'SoFi',

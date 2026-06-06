@@ -6,15 +6,15 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: var(--pad);
+    width: var(--nav-width);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 0;
+    padding: var(--nav-pad-y) 0;
     z-index: 10;
     border-right: 1px solid var(--c-line);
-    background: rgba(245, 243, 239, 0.8);
+    background: var(--nav-surface);
     backdrop-filter: blur(10px);
     pointer-events: auto;
 }
@@ -26,16 +26,24 @@
 
 /* Desktop Hero */
 .hero-sec {
-    padding-left: calc(var(--pad) * 2.5);
+    padding-left: calc(var(--nav-width) + var(--pad) * 1.5);
+}
+
+.hero-main {
+    padding-top: 7rem;
 }
 
 .headline .indent {
     margin-left: 12vw;
 }
 
+.headline__swap {
+    --headline-word-indent: 5vw;
+}
+
 /* Desktop Featured Work */
 .featured-sec {
-    padding-left: calc(var(--pad) * 2.5);
+    padding-left: calc(var(--nav-width) + var(--pad) * 1.5);
     padding-right: var(--pad);
 }
 
@@ -52,7 +60,7 @@
 
 /* Desktop Selected Clients */
 .clients-sec {
-    padding-left: calc(var(--pad) * 2.5);
+    padding-left: calc(var(--nav-width) + var(--pad) * 1.5);
     padding-right: var(--pad);
 }
 
@@ -64,7 +72,7 @@
 
 /* Desktop Information */
 .info-sec {
-    padding-left: calc(var(--pad) * 2.5);
+    padding-left: calc(var(--nav-width) + var(--pad) * 1.5);
     padding-right: var(--pad);
 }
 
