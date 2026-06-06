@@ -50,6 +50,93 @@ body.portfolio-page .logo-link:hover {
     margin: 0;
 }
 
+.portfolio-intro__body {
+    max-width: 42ch;
+    margin: 1.25rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--c-sub);
+}
+
+.about-content {
+    padding: 0 var(--pad) 6rem;
+    background: #FFFFFF;
+    position: relative;
+    z-index: 2;
+}
+
+.about-content__layout {
+    display: grid;
+    grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.about-headshot {
+    margin: 0;
+}
+
+.about-headshot__frame {
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.1),
+        0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.about-headshot__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #ECEAE6;
+}
+
+.about-headshot__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+    background-image: var(--grain-image);
+    background-repeat: repeat;
+    background-size: 220px 220px;
+}
+
+.about-headshot__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-content__copy {
+    max-width: 52ch;
+}
+
+.about-content__text {
+    max-width: none;
+    margin: 0 0 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--c-text);
+}
+
+.about-content__text:last-child {
+    margin-bottom: 0;
+}
+
+.about-content__text a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.about-content__text a:hover {
+    opacity: 0.6;
+}
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -241,7 +328,8 @@ body.portfolio-page .logo-link:hover {
 @media (min-width: 769px) {
     .portfolio-intro,
     .portfolio-grid,
-    .portfolio-hero {
+    .portfolio-hero,
+    .about-content {
         padding-left: calc(var(--nav-width) + var(--pad) * 1.5);
         padding-right: var(--pad);
     }
@@ -260,10 +348,23 @@ body.portfolio-page .logo-link:hover {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1rem;
     }
+
+    .about-content__layout {
+        grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
+        gap: 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
     .portfolio-grid {
         grid-template-columns: 1fr;
+    }
+
+    .about-content__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .about-headshot {
+        max-width: 220px;
     }
 }

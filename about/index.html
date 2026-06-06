@@ -1,52 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Zee - A team of 4 designers">
-  <title>About - Zee</title>
-  <script type="importmap">
-    {
-      "imports": {
-        "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js",
-        "@studio-freight/lenis": "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/+esm"
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="/src/styles/base.css">
-  <link rel="stylesheet" href="/src/styles/layout.css">
-  <link rel="stylesheet" href="/src/styles/components/header.css">
-  <link rel="stylesheet" href="/src/styles/components/footer.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>About — Zee Pauli</title>
+    <meta name="description" content="About Zee Pauli — branding, packaging, and experience design.">
+    <link rel="icon" href="/public/logos/clients/placeholder.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/src/styles/main.css?v=1.0.0">
+    <link rel="stylesheet" href="/src/styles/desktop.css?v=1.0.0" media="(min-width: 769px)">
+    <link rel="stylesheet" href="/src/styles/mobile.css?v=1.0.0" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/src/styles/portfolio.css?v=1.0.0">
+    <script type="importmap">
+        {
+            "imports": {
+                "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js",
+                "@studio-freight/lenis": "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/+esm"
+            }
+        }
+    </script>
 </head>
-<body data-page="about">
-  <div id="header-root"></div>
-
-  <main>
-    <section class="section" style="margin-top: 100px;">
-      <div class="container">
-        <h1>About Zee</h1>
-        <p style="font-size: var(--font-size-lg); margin-top: var(--spacing-lg); max-width: 800px;">
-          We are a team of 4 designers located between Portland, Oregon and Vancouver, Washington.
-          We specialize in creating snappy, interactive, and stylish digital experiences.
-        </p>
-        <div class="grid grid-2" style="margin-top: var(--spacing-xxl);">
-          <div>
-            <h3>Our Approach</h3>
-            <p>We combine Japanese contemporary design principles with Pacific Northwest aesthetics to create unique, memorable experiences.</p>
-          </div>
-          <div>
-            <h3>Our Team</h3>
-            <p>Four experienced designers who have worked with some of the biggest names in the industry.</p>
-          </div>
+<body class="portfolio-page about-page">
+    <nav class="nav-side">
+        <div class="nav-brand">
+            <a href="/" class="logo-link">
+                <div class="logo-vert">Zee Pauli</div>
+            </a>
         </div>
-      </div>
-    </section>
-  </main>
+        <div class="nav-social">
+                <a class="nav-social__link" href="https://www.linkedin.com/in/zeepauli" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-13h4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </a>
+                <a class="nav-social__link" href="https://www.instagram.com/zeepauli" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                    </svg>
+                </a>
+                <a class="nav-social__link" href="mailto:hello@zee-studio.com" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+        </div>
+    </nav>
 
-  <div id="footer-root"></div>
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <section class="portfolio-intro">
+                <p class="portfolio-intro__title">About</p>
+                <p class="portfolio-intro__body">Design for things people use, share, and remember.</p>
+            </section>
 
-  <script type="module" src="/src/pages/about.js"></script>
-  <script type="module" src="/src/app/boot.js"></script>
+            <section class="about-content">
+                <div class="about-content__layout">
+                    <figure class="about-headshot">
+                        <div class="about-headshot__frame">
+                            <div class="about-headshot__media">
+                                <img src="/public/images/placeholders/headshot.jpg" alt="Zee Pauli" width="600" height="750" loading="lazy" decoding="async">
+                            </div>
+                        </div>
+                    </figure>
+                    <div class="about-content__copy">
+                        <p class="about-content__text">Zee Pauli is a designer working across branding, packaging, and physical product experiences — with a focus on work that feels intentional, tactile, and built to last beyond a single launch moment.</p>
+                        <p class="about-content__text">Based in the Pacific Northwest, the practice combines editorial restraint with material craft: visual systems, structural packaging, and branded objects that hold up in the hand and in the world.</p>
+                        <p class="about-content__text">For new projects and collaborations, reach out at <a href="mailto:hello@zee-studio.com">hello@zee-studio.com</a>.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script type="module" src="/src/pages/about.js"></script>
 </body>
 </html>
-
