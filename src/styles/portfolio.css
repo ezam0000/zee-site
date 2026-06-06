@@ -655,10 +655,28 @@ body.portfolio-modal-open {
     }
 
     .portfolio-modal__gallery {
-        padding: 3.5rem 2rem 1rem;
+        padding: 3.5rem 1.25rem 1rem;
+    }
+
+    .portfolio-modal__stage {
+        grid-template-columns: 1fr auto auto 1fr;
+        grid-template-areas:
+            "figure figure figure figure"
+            ". prev next .";
+        gap: 1rem;
     }
 
     .portfolio-modal__figure {
-        padding-inline: 0.5rem;
+        grid-area: figure;
+        padding-inline: 0;
+        width: 100%;
+    }
+
+    .portfolio-modal__nav--prev {
+        grid-area: prev;
+    }
+
+    .portfolio-modal__nav--next {
+        grid-area: next;
     }
 }
