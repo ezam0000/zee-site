@@ -16,8 +16,6 @@ blob-report/
 # Dev / test / docs not needed on the static host
 tests/
 playwright.config.js
-package.json
-package-lock.json
 skills-lock.json
 CACHE_BUSTING.md
 DEPLOYMENT.md
