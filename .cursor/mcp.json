@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "sessionmem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "sessionmem",
+        "run"
+      ]
+    }
+  }
+}

@@ -1,14 +1,14 @@
 # Zee Website
 
-A professional design studio website built with vanilla JavaScript, Three.js, and modern web technologies.
+A packaging and brand design studio site for Zee Pauli, built as a static multi-page app with vanilla JavaScript ES modules.
 
 ## Features
 
-- **Interactive 3D Elements**: Three.js powered Lego block playground
-- **Performance-First**: Optimized for speed and accessibility
-- **Japanese Contemporary Design**: Minimalist aesthetic with PNW influences
-- **Modular Architecture**: Fully modular ES6+ codebase
-- **Analytics Ready**: Hotjar integration for user insights
+- Hero liquid WebGL background with reduced-motion fallback
+- Portfolio category pages with modal galleries
+- Smooth scrolling via Lenis (vendored)
+- Dark/light theme toggle
+- Hotjar-ready analytics hook
 
 ## Getting Started
 
@@ -30,6 +30,12 @@ npm start
 
 The site will be available at `http://localhost:3000`
 
+### Tests
+
+```bash
+npm test
+```
+
 ### Deployment
 
 Deploy to Vercel:
@@ -38,39 +44,31 @@ Deploy to Vercel:
 vercel
 ```
 
-Or connect your GitHub repository to Vercel for automatic deployments.
+Or connect your GitHub repository to Vercel for automatic deployments. See `DEPLOYMENT.md`.
 
 ## Project Structure
 
 ```
 /
-├── public/          # Static assets (images, logos)
+├── public/          # Static assets (images, logos, vendor)
 ├── src/
-│   ├── app/         # App initialization
+│   ├── app/         # Config and environment
 │   ├── components/  # UI components
-│   ├── three/       # Three.js scenes
+│   ├── core/        # Cross-page runtime (smooth scroll, etc.)
+│   ├── effects/     # Visual effects
+│   ├── pages/       # Page entry modules
 │   ├── styles/      # CSS stylesheets
-│   ├── data/        # JSON data files
+│   ├── data/        # JSON content (optional / future)
 │   ├── analytics/   # Analytics integration
 │   └── utils/       # Utility functions
 ├── index.html       # Home page
-├── work/            # Work/portfolio pages
+├── branding/        # Branding portfolio
+├── packaging/       # Packaging portfolio
+├── experience/      # Experience portfolio
 ├── about/           # About page
 ├── contact/         # Contact page
-└── play/            # 3D playground
+└── work/            # Generic portfolio page
 ```
-
-## Replacing Assets
-
-### Images
-
-1. Replace files in `public/images/` maintaining the same filenames
-2. Or update paths in JSON data files (`src/data/case_studies.json`)
-
-### Logos
-
-1. Replace SVG/PNG files in `public/logos/` maintaining filenames
-2. Or update paths in JSON data files
 
 ## Configuration
 
@@ -82,13 +80,19 @@ Update `src/analytics/hotjar.js` with your Hotjar site ID:
 const hotjarId = "YOUR_HOTJAR_ID";
 ```
 
+### Lenis vendor copy
+
+After upgrading the `lenis` package:
+
+```bash
+cp node_modules/lenis/dist/lenis.mjs public/vendor/lenis.mjs
+```
+
 ## Browser Support
 
-- Modern browsers with WebGL support
-- Graceful degradation for older browsers
+- Modern browsers with ES modules and WebGL
 - Respects `prefers-reduced-motion`
 
 ## License
 
-© 2024 Zee
-
+© Zee Pauli

@@ -1,0 +1,38 @@
+---
+description: Preserve Zee's source architecture and module boundaries
+globs: "{src/**/*.js,**/*.html}"
+alwaysApply: false
+---
+
+# Source Architecture
+
+Zee is a static, multi-page site built with vanilla JavaScript and native ES modules.
+
+## Runtime entry points
+
+- `index.html` loads `src/main.js`.
+- Subpages load their matching `src/pages/*.js` module directly.
+- Keep exactly one initialization path per page.
+- Keep entry modules focused on orchestration; move reusable behavior into the appropriate module below.
+- Smooth scrolling goes through `src/core/smooth-scroll.js` (do not re-implement Lenis setup in page entry modules).
+
+## Module boundaries
+
+- `src/pages/`: page-level composition and initialization.
+- `src/components/`: reusable UI rendering and component interactions.
+- `src/effects/`: isolated visual and animation effects.
+- `src/core/`: reusable cross-page runtime behavior such as smooth scrolling and transitions.
+- `src/utils/`: small dependency-light helpers; use `src/utils/dom.js` for shared DOM primitives.
+- `src/analytics/`: analytics only.
+- `src/app/`: configuration and application-level setup.
+- `src/data/`: content data; `public/`: static assets.
+
+## Dependency discipline
+
+- Do not duplicate cross-page behavior in entry modules. Extend or reuse the relevant `core`, `utils`, or `analytics` module.
+- Keep dependencies flowing from entry/page modules into components, effects, core, and utilities; do not introduce import cycles.
+- Centralize reusable configuration in `src/app/config.js` instead of scattering literals.
+- Preserve `prefers-reduced-motion` handling when adding or changing motion effects.
+- Lazy-load optional heavy browser dependencies, as done for Lenis.
+
+After a structural change involving several modules, run `graphify update .` and check the report for new import cycles, duplicated hubs, or unexpectedly central entry modules.

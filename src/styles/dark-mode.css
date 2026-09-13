@@ -71,59 +71,6 @@ body.dark-mode .hero-sec h1 em {
     color: var(--c-accent);
 }
 
-/* Featured Work */
-body.dark-mode .featured-image {
-    background: transparent;
-}
-
-body.dark-mode .featured-image--contain img {
-    filter:
-        drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45))
-        drop-shadow(0 12px 22px rgba(0, 0, 0, 0.55))
-        drop-shadow(0 36px 60px rgba(0, 0, 0, 0.65));
-}
-
-body.dark-mode .featured-lede {
-    color: var(--c-text);
-    mix-blend-mode: screen;
-}
-
-body.dark-mode .featured-brand {
-    color: var(--c-text-secondary);
-}
-
-/* Selected Clients */
-body.dark-mode .clients-list {
-    color: var(--c-text);
-    mix-blend-mode: screen;
-}
-
-/* Information */
-body.dark-mode .info-bio {
-    color: var(--c-text);
-    mix-blend-mode: screen;
-}
-
-body.dark-mode .info-field-label {
-    color: var(--c-text-secondary);
-}
-
-body.dark-mode .info-form input,
-body.dark-mode .info-form textarea {
-    color: var(--c-text);
-    border-bottom-color: var(--c-line);
-}
-
-body.dark-mode .info-form input:focus,
-body.dark-mode .info-form textarea:focus {
-    border-bottom-color: var(--c-accent);
-}
-
-body.dark-mode .info-submit {
-    color: var(--c-text);
-    border-bottom-color: var(--c-text);
-}
-
 /* Theme switch — softer shadows in dark mode */
 body.dark-mode .theme-switch__track {
     --neo-shadow-dark: rgba(0, 0, 0, 0.28);

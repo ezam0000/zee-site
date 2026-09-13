@@ -1,0 +1,25 @@
+# Local / agent tooling
+.agents/
+.cursor/
+.claude/
+.DS_Store
+
+# Generated
+graphify-out/
+node_modules/
+.vercel/
+test-results/
+playwright-report/
+blob-report/
+.playwright-mcp/
+
+# Dev / test / docs not needed on the static host
+tests/
+playwright.config.js
+package.json
+package-lock.json
+skills-lock.json
+CACHE_BUSTING.md
+DEPLOYMENT.md
+README.md
+update-version.js

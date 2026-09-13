@@ -53,7 +53,13 @@ coverage/
 # Editors / local tooling
 .idea/
 .vscode/
-.cursor/
+.cursor/*
+!.cursor/mcp.json
+!.cursor/rules/
+!.cursor/rules/**
 *.swp
 *.swo
 *~
+
+# Graphify local knowledge graph
+graphify-out/

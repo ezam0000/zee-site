@@ -7,18 +7,21 @@ This site uses multiple cache busting strategies to prevent Safari and other bro
 When you deploy a new version, update the version query parameter in all HTML files:
 
 1. **Update version in HTML files:**
-   - Change `?v=1.0.0` to `?v=1.0.1` (or use timestamp like `?v=1234567890`)
-   - Update in:
-     - `index.html` (stylesheets and main.js)
+   - Change `?v=1.0.0` to `?v=1.0.1` (or use a timestamp like `?v=1234567890`)
+   - Pages that use versioned assets include:
+     - `index.html`
      - `about/index.html`
      - `contact/index.html`
+     - `branding/index.html`
+     - `packaging/index.html`
+     - `experience/index.html`
      - `work/index.html`
-     - `play/index.html`
 
-2. **Quick update script:**
+2. **Quick update scripts:**
    ```bash
-   # Find and replace version in all HTML files
-   find . -name "*.html" -type f -exec sed -i '' 's/v=1.0.0/v=1.0.1/g' {} \;
+   npm run version:update
+   # or
+   npm run version:timestamp
    ```
 
 ## Cache Busting Methods
@@ -28,15 +31,8 @@ When you deploy a new version, update the version query parameter in all HTML fi
 3. **Version Query Parameters**: Added to CSS and JS files - update version number when deploying
 4. **Vercel Headers**: Configured to prevent caching of HTML and `/src/` files
 
-## For Development
-
-If you want automatic cache busting during development, you can use:
-- `?v=Date.now()` in JavaScript (but this requires JS execution)
-- Or manually increment version number on each deploy
-
 ## Recommended Workflow
 
-1. Before deploying, increment the version number in all HTML files
+1. Before deploying, run `npm run version:update` (or `version:timestamp`)
 2. Deploy to Vercel
 3. The combination of no-cache headers + version params ensures fresh content
-

@@ -7,14 +7,13 @@
     "start": "npx serve . -p 3000 --cors",
     "dev": "npx serve . -p 3000 --cors",
     "build": "echo 'No build step needed - static site'",
+    "test": "playwright test",
     "version:update": "node update-version.js",
     "version:timestamp": "node update-version.js $(date +%s)"
   },
-  "dependencies": {
-    "@studio-freight/lenis": "^1.0.42"
-  },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
+    "lenis": "^1.3.26",
     "serve": "^14.2.6"
   }
 }

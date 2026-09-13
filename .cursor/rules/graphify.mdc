@@ -1,0 +1,20 @@
+---
+description: Use graphify for architecture/dependency questions when graphify-out exists
+alwaysApply: false
+globs:
+---
+
+This project can use graphify for codebase knowledge graphs (`graphify-out/`).
+
+Use graphify when the user asks about architecture, module relationships, or dependency paths:
+
+```bash
+graphify .                         # build graph (first time / major changes)
+graphify path "<A>" "<B>"          # dependency path
+graphify explain "<concept>"       # related nodes
+graphify update .                  # refresh after code changes (AST-only)
+```
+
+Do not run graphify for routine single-file edits. Prefer Read/Grep for targeted work.
+
+If `graphify-out/wiki/index.md` exists, prefer navigating that for broad orientation.

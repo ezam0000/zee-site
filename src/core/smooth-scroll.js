@@ -1,35 +1,44 @@
 import { prefersReducedMotion } from "../utils/perf.js";
 
-export function initSmoothScroll() {
+const DEFAULT_OPTIONS = {
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+  wheelMultiplier: 1,
+  touchMultiplier: 2,
+  infinite: false,
+  lerp: 0.08,
+};
+
+/**
+ * Lazy-load Lenis and start its RAF loop.
+ * @param {{ desktopOnly?: boolean }} [options]
+ * @returns {Promise<object | null>} Lenis instance, or null when skipped/unavailable
+ */
+export function initSmoothScroll({ desktopOnly = false } = {}) {
   if (prefersReducedMotion()) {
-    return null;
+    return Promise.resolve(null);
   }
 
-  // Lazy load Lenis to avoid blocking
-  import("@studio-freight/lenis").then((module) => {
-    const Lenis = module.default || module.Lenis || module;
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
+  if (desktopOnly && window.matchMedia("(max-width: 768px)").matches) {
+    return Promise.resolve(null);
+  }
 
-    function raf(time) {
-      lenis.raf(time);
+  return import("lenis")
+    .then((module) => {
+      const Lenis = module.default || module.Lenis || module;
+      const lenis = new Lenis({ ...DEFAULT_OPTIONS });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
-    }
 
-    requestAnimationFrame(raf);
-  }).catch(() => {
-    console.warn("Lenis not available");
-  });
-
-  return null;
+      return lenis;
+    })
+    .catch(() => {
+      console.warn("Lenis not available");
+      return null;
+    });
 }
-

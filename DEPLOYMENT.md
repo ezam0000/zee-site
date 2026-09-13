@@ -45,10 +45,10 @@ vercel
 
 ### Smooth scroll (Lenis)
 
-Runtime Lenis is served from the committed file `public/vendor/lenis.mjs` (copied from the lockfile package). HTML import maps point at that path — not jsDelivr. After upgrading `@studio-freight/lenis`, refresh the vendor copy:
+Runtime Lenis is served from the committed file `public/vendor/lenis.mjs` (copied from the `lenis` package). HTML import maps map `"lenis"` to that path — not jsDelivr. After upgrading `lenis`, refresh the vendor copy:
 
 ```bash
-cp node_modules/@studio-freight/lenis/dist/lenis.mjs public/vendor/lenis.mjs
+cp node_modules/lenis/dist/lenis.mjs public/vendor/lenis.mjs
 ```
 
 ### Hotjar

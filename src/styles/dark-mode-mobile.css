@@ -27,12 +27,6 @@
         text-shadow: 0 0 40px rgba(160, 175, 195, 0.04);
     }
     
-    /* Information form - prevent iOS zoom on focus */
-    body.dark-mode .info-form input,
-    body.dark-mode .info-form textarea {
-        font-size: 16px;
-    }
-    
     /* Reduce vignette on mobile for better visibility */
     body.dark-mode::after {
         display: none;

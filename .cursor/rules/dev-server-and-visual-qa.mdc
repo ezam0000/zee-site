@@ -1,0 +1,25 @@
+---
+description: Do not start the dev server or run visual QA — the user handles both manually
+alwaysApply: true
+---
+
+# Dev Server & Visual QA
+
+## Do not start the dev server
+
+- Never run `npm start`, `npm run dev`, `npx serve`, or equivalent commands to start a local server.
+- The user starts and stops the dev server manually.
+- If a server is needed to verify something, ask the user to start it first — do not start it yourself.
+
+## Look and feel is owned by the user
+
+- The user handles all visual review: layout, spacing, typography, colors, responsive behavior, dark mode, and overall polish.
+- Do not use browser automation, screenshots, or MCP browser tools to check appearance unless the user explicitly asks.
+- After UI changes, summarize what changed in code/CSS and let the user verify in the browser.
+- Do not ask the user to confirm visual details you could only judge by running the site yourself.
+
+## What you should still do
+
+- Implement requested UI/CSS/HTML/JS changes correctly.
+- Run non-visual checks when appropriate (e.g. unit tests, lint) if the user asks or the task requires it.
+- Flag likely visual risks in prose (e.g. "Grön SVG may invert oddly in dark mode") without attempting to preview them.
