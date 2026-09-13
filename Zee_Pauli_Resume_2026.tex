@@ -1,0 +1,128 @@
+% ATS-focused resume for pdfLaTeX on Overleaf (default compiler).
+% Keep the layout single-column and preserve plain-text contact details.
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\input{glyphtounicode}
+\pdfgentounicode=1
+\DisableLigatures{encoding = *, family = *}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{0.95}\selectfont
+\raggedright
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\setlist[itemize]{
+  leftmargin=1.1em,
+  label=\textbullet,
+  itemsep=1pt,
+  topsep=1pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+\urlstyle{same}
+
+\newcommand{\resumesection}[1]{%
+  \vspace{4.5pt}%
+  {\large\bfseries #1}\par
+  \vspace{1pt}\hrule\vspace{2.5pt}%
+}
+
+\newcommand{\role}[3]{%
+  {\bfseries #1}\par
+  {\itshape #2} \enspace|\enspace #3\par
+}
+
+\begin{document}
+
+{\fontsize{20}{22}\selectfont\bfseries ZEE PAULI}\par
+\vspace{1pt}
+{\large Brand Designer \& Art Director}\par
+\vspace{2pt}
+Portland, OR \enspace|\enspace 612-270-0708 \enspace|\enspace
+\href{mailto:zee.pauli@outlook.com}{zee.pauli@outlook.com} \enspace|\enspace
+\href{https://zee-studio.com}{https://zee-studio.com}
+
+\resumesection{SUMMARY}
+Brand designer and art director with creative direction experience leading identities,
+integrated campaigns, packaging, and digital experiences from concept through production.
+Combines brand strategy and hands-on design with structural packaging and manufacturing
+expertise. Experienced presenting creative to leadership and clients, guiding brand
+standards across physical and digital channels.
+
+\resumesection{EXPERIENCE}
+\role{Grön}{Designer, Creative Direction}{2024-Present}
+Acquired by Wyld in 2026
+\begin{itemize}
+  \item Led creation of Pixlz, a Grön sub-brand, owning visual identity and packaging
+    design across 3 SKUs. Set art direction for its website, digital and print marketing,
+    and retail displays; contributed to product color, flavor development, and launch
+    event planning.
+  \item Conceived and led campaign strategy and creative direction for consecutive
+    Halloween campaigns, Bite Club and Grön Arcana, spanning packaging, custom
+    illustration, campaign systems, microsite UI direction, and interaction concepts.
+  \item Managed packaging design and production across 5 product lines: Pearls, MEGA,
+    Pips, Chocolate, and Pixlz. Prepared design updates, market-specific artwork,
+    proofs, and production files for multi-state cannabis packaging requirements.
+  \item Designed digital and retail marketing assets across email, social media, web
+    banners, and point-of-purchase materials, adapting creative across placements and
+    market requirements.
+  \item Led Grön brand and packaging integration into Wyld's systems following the
+    acquisition, guiding Wyld's designers on Grön brand standards.
+  \item Contributed to marketing strategy and built sales pitch decks for leadership,
+    external clients, and retail partners.
+\end{itemize}
+
+\vspace{3pt}
+\role{WoodchuckUSA}{Senior Designer}{2021-2024}
+\begin{itemize}
+  \item Designed custom promotional products, packaging, PR and influencer kits, and
+    corporate gifts and awards for brands including Nike, Coca-Cola, and the NFL;
+    managed each project from client brief to finished product.
+  \item Designed retail displays from concept through fabrication, preparing CNC and
+    laser-cutting files, refining prototypes, and approving final builds.
+  \item Engineered structural packaging, custom dielines, and wood label packaging,
+    sourcing and testing materials to balance durability, aesthetics, and budget.
+  \item Designed and helped build the company's e-commerce and B2B websites,
+    contributing UX, site functionality, and hands-on development work.
+  \item Contributed to brand positioning, messaging, go-to-market planning, and paid
+    campaign and spend strategy across Etsy, Amazon, Google, and Meta.
+\end{itemize}
+
+\vspace{2pt}
+\role{Apogee Commemoratives}{Fabricator}{2017-2021}
+\begin{itemize}
+  \item Designed and fabricated custom framing and awards with precision cutting,
+    finishing, and assembly for client work.
+  \item Operated and maintained shop machinery while meeting quality and delivery
+    requirements.
+\end{itemize}
+
+\resumesection{SKILLS}
+\textbf{Design and direction:} Brand identity, brand strategy, art direction, creative
+direction, campaign development, creative concepting, design systems, typography,
+illustration, layout, packaging, website design, UX/UI direction, and email design.\\[1.5pt]
+\textbf{Production:} Structural packaging, dieline engineering, materials sourcing and
+testing, prepress, print proofing, CNC and laser-cutting files, and multi-state cannabis
+packaging compliance.\\[1.5pt]
+\textbf{Software and workflow:} Adobe Illustrator, InDesign, Photoshop, Figma, Shopify,
+Klaviyo, custom Adobe ExtendScript automation, Figma plugin development, AI-assisted
+development with Cursor and GitHub.\\[1.5pt]
+\textbf{Collaboration and strategy:} Creative presentations, marketing strategy,
+positioning, messaging, go-to-market planning, cross-functional collaboration, vendor
+coordination, budget management, project management.
+
+\resumesection{EDUCATION}
+\textbf{Madison Media Institute} \enspace|\enspace Madison, WI\par
+Associate of Arts in Graphic Design and Computer Science \enspace|\enspace 2011-2013
+
+\end{document}
