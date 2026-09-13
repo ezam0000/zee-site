@@ -1,21 +1,12 @@
+const ALLOWED_PAGES = new Set(["about", "contact", "portfolio"]);
+
 export function boot() {
   const page = document.body.dataset.page;
-  if (!page) {
-    // If no page specified, try to load home
-    const modulePath = `/src/pages/home.js`;
-    import(modulePath)
-      .then((module) => {
-        if (module.default) {
-          module.default();
-        }
-      })
-      .catch((error) => {
-        console.warn(`No page module found`, error);
-      });
+  if (!page || !ALLOWED_PAGES.has(page)) {
+    console.warn(`No allowed page module for data-page="${page ?? ""}"`);
     return;
   }
 
-  // Dynamically load page-specific modules
   const modulePath = `/src/pages/${page}.js`;
 
   import(modulePath)
@@ -29,10 +20,8 @@ export function boot() {
     });
 }
 
-// Initialize on DOM ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", boot);
 } else {
   boot();
 }
-

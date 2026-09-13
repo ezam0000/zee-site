@@ -16,7 +16,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Get version from command line or use timestamp
-const newVersion = process.argv[2] || Date.now().toString();
+const VERSION_PATTERN = /^[A-Za-z0-9._-]+$/;
+const requestedVersion = process.argv[2];
+if (requestedVersion !== undefined && !VERSION_PATTERN.test(requestedVersion)) {
+  console.error(
+    `Invalid version "${requestedVersion}". Use only letters, numbers, dots, underscores, or hyphens.`
+  );
+  process.exit(1);
+}
+const newVersion = requestedVersion || Date.now().toString();
 
 // Recursively find all HTML files
 function findHTMLFiles(dir, fileList = []) {

@@ -11,8 +11,7 @@
     "version:timestamp": "node update-version.js $(date +%s)"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^1.0.42",
-    "gsap": "^3.12.5"
+    "@studio-freight/lenis": "^1.0.42"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",

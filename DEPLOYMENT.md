@@ -43,22 +43,35 @@ vercel
 
 4. Vercel will auto-detect settings and deploy
 
-### Environment Variables
+### Smooth scroll (Lenis)
 
-If needed, add environment variables in Vercel dashboard:
-- `HOTJAR_ID` (optional, for analytics)
+Runtime Lenis is served from the committed file `public/vendor/lenis.mjs` (copied from the lockfile package). HTML import maps point at that path — not jsDelivr. After upgrading `@studio-freight/lenis`, refresh the vendor copy:
+
+```bash
+cp node_modules/@studio-freight/lenis/dist/lenis.mjs public/vendor/lenis.mjs
+```
+
+### Hotjar
+
+Hotjar is off until you set a real site ID in `src/analytics/hotjar.js`:
+
+```javascript
+const hotjarId = "YOUR_HOTJAR_ID";
+```
+
+Replace the placeholder with your Hotjar site ID. The loader only runs on non-localhost hosts and skips when the placeholder remains.
+
+If you enable Hotjar, widen `Content-Security-Policy` in `vercel.json` so `script-src` (and any required Hotjar hosts) allow `https://static.hotjar.com` and related Hotjar endpoints. The default CSP is `'self'` only.
+
+### Security headers
+
+`vercel.json` sets CSP, `X-Content-Type-Options`, `Referrer-Policy`, and `X-Frame-Options`, plus existing Cache-Control rules. Confirm them on a preview deploy response.
 
 ### Post-Deployment
 
-1. Update Hotjar ID in `src/analytics/hotjar.js`:
-```javascript
-const hotjarId = process.env.HOTJAR_ID || "YOUR_HOTJAR_ID";
-```
-
+1. Confirm Lenis loads from `/public/vendor/lenis.mjs` (no jsDelivr requests)
 2. Verify all assets are loading correctly
-
-3. Test all pages and interactions
-
+3. Test all pages and interactions (including contact mailto)
 4. Check Lighthouse scores (aim for 90+)
 
 ## Troubleshooting
@@ -68,16 +81,10 @@ const hotjarId = process.env.HOTJAR_ID || "YOUR_HOTJAR_ID";
 - Ensure all imports use `.js` extension
 - Check browser console for specific errors
 - Verify `type="module"` in script tags
-
-### 3D Not Loading
-
-- Check WebGL support: `chrome://gpu` (Chrome)
-- Verify Three.js is installed: `npm list three`
-- Check browser console for errors
+- Confirm `/public/vendor/lenis.mjs` is deployed
 
 ### Images Not Showing
 
-- Verify image paths in JSON data files
+- Verify image paths in data files or components
 - Check file permissions
 - Ensure images are in `public/` directory
-

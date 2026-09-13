@@ -66,12 +66,60 @@ const PLACEHOLDER_PROJECTS = [
     },
 ];
 
-function buildDetailsHtml(project) {
-    return `
-        <span class="portfolio-tile__meta">${project.meta}</span>
-        <h3 class="portfolio-tile__title">${project.title}</h3>
-        <p class="portfolio-tile__description">${project.description}</p>
-    `;
+function buildDetails(project) {
+    const details = document.createElement('div');
+    details.className = 'portfolio-tile__details';
+
+    const meta = document.createElement('span');
+    meta.className = 'portfolio-tile__meta';
+    meta.textContent = project.meta;
+
+    const title = document.createElement('h3');
+    title.className = 'portfolio-tile__title';
+    title.textContent = project.title;
+
+    const description = document.createElement('p');
+    description.className = 'portfolio-tile__description';
+    description.textContent = project.description;
+
+    details.append(meta, title, description);
+    return details;
+}
+
+function buildTile(project, image) {
+    const tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'portfolio-tile';
+    tile.setAttribute('aria-label', `Open gallery for ${project.title}`);
+
+    const frame = document.createElement('div');
+    frame.className = 'portfolio-tile__frame';
+
+    const media = document.createElement('div');
+    media.className = 'portfolio-tile__media';
+
+    const img = document.createElement('img');
+    img.src = image;
+    img.alt = project.title;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'portfolio-tile__overlay';
+    overlay.appendChild(buildDetails(project));
+
+    media.append(img, overlay);
+    frame.appendChild(media);
+
+    const mobileDetails = buildDetails(project);
+    mobileDetails.classList.add('portfolio-tile__details--mobile');
+
+    const label = document.createElement('span');
+    label.className = 'portfolio-tile__label';
+    label.textContent = project.title;
+
+    tile.append(frame, mobileDetails, label);
+    return tile;
 }
 
 export function initPortfolioStack() {
@@ -84,32 +132,10 @@ export function initPortfolioStack() {
 
     PLACEHOLDER_PROJECTS.forEach((project, index) => {
         const image = project.cover ?? PLACEHOLDER_IMAGES[index] ?? PLACEHOLDER_IMAGES[0];
-        const detailsHtml = buildDetailsHtml(project);
-        const tile = document.createElement('button');
-        tile.type = 'button';
-        tile.className = 'portfolio-tile';
-        tile.setAttribute('aria-label', `Open gallery for ${project.title}`);
-        tile.innerHTML = `
-            <div class="portfolio-tile__frame">
-                <div class="portfolio-tile__media">
-                    <img src="${image}" alt="${project.title}" loading="lazy" decoding="async">
-                    <div class="portfolio-tile__overlay">
-                        <div class="portfolio-tile__details">
-                            ${detailsHtml}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio-tile__details portfolio-tile__details--mobile">
-                ${detailsHtml}
-            </div>
-            <span class="portfolio-tile__label">${project.title}</span>
-        `;
-
+        const tile = buildTile(project, image);
         tile.addEventListener('click', () => {
             showPortfolioProject(project, tile);
         });
-
         grid.appendChild(tile);
     });
 }

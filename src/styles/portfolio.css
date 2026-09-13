@@ -680,3 +680,58 @@ body.portfolio-modal-open {
         grid-area: next;
     }
 }
+
+/* Contact form */
+.contact-form {
+    max-width: 32rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-form__field label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+    width: 100%;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.contact-form__field textarea {
+    resize: vertical;
+    min-height: 8rem;
+}
+
+.contact-form__submit {
+    margin-top: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.contact-form__submit:hover {
+    opacity: 0.75;
+}
