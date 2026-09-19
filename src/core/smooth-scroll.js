@@ -10,6 +10,9 @@ const DEFAULT_OPTIONS = {
   lerp: 0.08,
 };
 
+let lenisInstance = null;
+let lenisPromise = null;
+
 /**
  * Lazy-load Lenis and start its RAF loop.
  * @param {{ desktopOnly?: boolean }} [options]
@@ -24,10 +27,15 @@ export function initSmoothScroll({ desktopOnly = false } = {}) {
     return Promise.resolve(null);
   }
 
-  return import("lenis")
+  if (lenisPromise) {
+    return lenisPromise;
+  }
+
+  lenisPromise = import("lenis")
     .then((module) => {
       const Lenis = module.default || module.Lenis || module;
       const lenis = new Lenis({ ...DEFAULT_OPTIONS });
+      lenisInstance = lenis;
 
       function raf(time) {
         lenis.raf(time);
@@ -39,6 +47,17 @@ export function initSmoothScroll({ desktopOnly = false } = {}) {
     })
     .catch(() => {
       console.warn("Lenis not available");
+      lenisPromise = null;
       return null;
     });
+
+  return lenisPromise;
+}
+
+export function stopSmoothScroll() {
+  lenisInstance?.stop();
+}
+
+export function startSmoothScroll() {
+  lenisInstance?.start();
 }

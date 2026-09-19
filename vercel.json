@@ -2,6 +2,18 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": ".",
+  "redirects": [
+    { "source": "/branding", "destination": "/work/", "permanent": true },
+    { "source": "/branding/", "destination": "/work/", "permanent": true },
+    { "source": "/packaging", "destination": "/work/", "permanent": true },
+    { "source": "/packaging/", "destination": "/work/", "permanent": true },
+    { "source": "/portfolio", "destination": "/work/", "permanent": true },
+    { "source": "/portfolio/", "destination": "/work/", "permanent": true },
+    { "source": "/experience", "destination": "/work/", "permanent": true },
+    { "source": "/experience/", "destination": "/work/", "permanent": true },
+    { "source": "/contact", "destination": "/about/", "permanent": true },
+    { "source": "/contact/", "destination": "/about/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

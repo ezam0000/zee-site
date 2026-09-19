@@ -27,7 +27,12 @@ function syncHeroLiquidBackground() {
     setHeroLiquidBackground(getHeroLiquidImageUrl(), getPageBackgroundColor());
 }
 
-const savedDarkMode = localStorage.getItem('darkMode') !== 'false';
+// Light by default. Dark preference is ignored while the theme toggle is hidden.
+const themeToggle = document.querySelector('#theme-toggle');
+const themeToggleVisible = Boolean(
+    themeToggle && !themeToggle.closest('[hidden], .theme-switch-container[hidden]')
+);
+const savedDarkMode = themeToggleVisible && localStorage.getItem('darkMode') === 'true';
 document.body.classList.toggle('dark-mode', savedDarkMode);
 
 let heroLiquidActive = false;
@@ -45,8 +50,7 @@ function bootHeroLiquid() {
 }
 requestAnimationFrame(() => requestAnimationFrame(bootHeroLiquid));
 
-// Initialize theme switch
-const themeToggle = document.querySelector('#theme-toggle');
+// Initialize theme switch (kept for when the control is shown again)
 if (themeToggle) {
     themeToggle.checked = !savedDarkMode;
     themeToggle.addEventListener('change', () => {

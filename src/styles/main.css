@@ -87,7 +87,7 @@ body {
     font-family: var(--font-sans);
     margin: 0;
     -webkit-font-smoothing: antialiased;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.75;
     overflow-x: hidden;
     max-width: 100%;
@@ -395,6 +395,8 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
    THEME SWITCH - Neumorphic light/dark toggle
    ===================================================== */
 .theme-switch-container {
+    /* Temporarily hidden — keep markup/JS for a possible later return */
+    display: none !important;
     position: fixed;
     top: 24px;
     right: 24px;

@@ -16,12 +16,10 @@ test.describe('Zee Homepage', () => {
     await expect(headline).toContainText('Design for');
   });
 
-  test('should display portfolio navigation links', async ({ page }) => {
+  test('should display site navigation links', async ({ page }) => {
     const links = page.locator('.hero-portfolio-links .hero-portfolio-link');
-    await expect(links).toHaveCount(4);
-    await expect(page.getByRole('link', { name: 'branding' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'packaging' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'experience' })).toBeVisible();
+    await expect(links).toHaveCount(2);
+    await expect(page.getByRole('link', { name: 'work' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'about' })).toBeVisible();
   });
 

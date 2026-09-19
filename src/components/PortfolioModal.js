@@ -1,34 +1,40 @@
+import { startSmoothScroll, stopSmoothScroll } from '../core/smooth-scroll.js';
+
 let modalRoot = null;
 let activeProject = null;
-let activeImageIndex = 0;
 let previousFocus = null;
-
-const ARROW_ICON = `
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-`;
 
 function getGalleryImages(project) {
     return project.gallery ?? [project.cover];
 }
 
-function renderGalleryImage() {
+function renderGallery() {
     if (!modalRoot || !activeProject) return;
 
     const images = getGalleryImages(activeProject);
-    const image = modalRoot.querySelector('.portfolio-modal__image');
-    const counter = modalRoot.querySelector('.portfolio-modal__counter');
-    const prevButton = modalRoot.querySelector('.portfolio-modal__nav--prev');
-    const nextButton = modalRoot.querySelector('.portfolio-modal__nav--next');
+    const scroller = modalRoot.querySelector('.portfolio-modal__scroller');
+    scroller.replaceChildren();
 
-    activeImageIndex = Math.min(activeImageIndex, images.length - 1);
-    image.src = images[activeImageIndex];
-    image.alt = `${activeProject.title} — image ${activeImageIndex + 1} of ${images.length}`;
-    counter.textContent = `${activeImageIndex + 1} / ${images.length}`;
+    images.forEach((src, index) => {
+        const figure = document.createElement('figure');
+        figure.className = 'portfolio-modal__figure';
 
-    prevButton.disabled = activeImageIndex === 0;
-    nextButton.disabled = activeImageIndex === images.length - 1;
+        const media = document.createElement('div');
+        media.className = 'portfolio-modal__media';
+
+        const img = document.createElement('img');
+        img.className = 'portfolio-modal__image';
+        img.src = src;
+        img.alt = `${activeProject.title} — image ${index + 1} of ${images.length}`;
+        img.loading = index === 0 ? 'eager' : 'lazy';
+        img.decoding = 'async';
+
+        media.appendChild(img);
+        figure.appendChild(media);
+        scroller.appendChild(figure);
+    });
+
+    scroller.scrollTop = 0;
 }
 
 function renderProjectDetails() {
@@ -47,7 +53,7 @@ function closeModal() {
     modalRoot.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('portfolio-modal-open');
     activeProject = null;
-    activeImageIndex = 0;
+    startSmoothScroll();
 
     if (previousFocus instanceof HTMLElement) {
         previousFocus.focus();
@@ -59,28 +65,17 @@ function openModal(project, trigger) {
     if (!modalRoot) return;
 
     activeProject = project;
-    activeImageIndex = 0;
     previousFocus = trigger ?? document.activeElement;
 
     renderProjectDetails();
-    renderGalleryImage();
+    renderGallery();
 
+    stopSmoothScroll();
     modalRoot.classList.add('is-open');
     modalRoot.setAttribute('aria-hidden', 'false');
     document.body.classList.add('portfolio-modal-open');
 
     modalRoot.querySelector('.portfolio-modal__close').focus();
-}
-
-function shiftImage(delta) {
-    if (!activeProject) return;
-
-    const images = getGalleryImages(activeProject);
-    const nextIndex = activeImageIndex + delta;
-    if (nextIndex < 0 || nextIndex >= images.length) return;
-
-    activeImageIndex = nextIndex;
-    renderGalleryImage();
 }
 
 function onKeyDown(event) {
@@ -89,18 +84,6 @@ function onKeyDown(event) {
     if (event.key === 'Escape') {
         event.preventDefault();
         closeModal();
-        return;
-    }
-
-    if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        shiftImage(-1);
-        return;
-    }
-
-    if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        shiftImage(1);
     }
 }
 
@@ -122,40 +105,39 @@ function ensureModal() {
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="portfolio-modal__layout">
-                <div class="portfolio-modal__gallery">
-                    <div class="portfolio-modal__stage">
-                        <button type="button" class="portfolio-modal__nav portfolio-modal__nav--prev" aria-label="Previous image">
-                            ${ARROW_ICON}
-                        </button>
-                        <figure class="portfolio-modal__figure">
-                            <div class="portfolio-modal__media">
-                                <img class="portfolio-modal__image" src="" alt="">
-                            </div>
-                        </figure>
-                        <button type="button" class="portfolio-modal__nav portfolio-modal__nav--next" aria-label="Next image">
-                            ${ARROW_ICON}
-                        </button>
-                    </div>
-                    <div class="portfolio-modal__gallery-footer">
-                        <span class="portfolio-modal__counter"></span>
-                    </div>
-                </div>
-                <div class="portfolio-modal__content">
-                    <span class="portfolio-modal__meta"></span>
+                <div
+                    class="portfolio-modal__scroller"
+                    data-lenis-prevent
+                    data-lenis-prevent-wheel
+                    data-lenis-prevent-touch
+                    aria-label="Project images"
+                ></div>
+                <aside class="portfolio-modal__content">
                     <h2 class="portfolio-modal__title" id="portfolio-modal-title"></h2>
                     <p class="portfolio-modal__description"></p>
                     <p class="portfolio-modal__body"></p>
-                </div>
+                    <span class="portfolio-modal__meta"></span>
+                </aside>
             </div>
         </div>
     `;
 
     document.body.appendChild(modalRoot);
 
+    const dialog = modalRoot.querySelector('.portfolio-modal__dialog');
+    const scroller = modalRoot.querySelector('.portfolio-modal__scroller');
+
+    // Trackpad/wheel anywhere in the modal scrolls the photo column.
+    dialog.addEventListener('wheel', (event) => {
+        if (window.matchMedia('(max-width: 900px)').matches) return;
+        if (scroller.contains(event.target)) return;
+
+        event.preventDefault();
+        scroller.scrollTop += event.deltaY;
+    }, { passive: false });
+
     modalRoot.querySelector('.portfolio-modal__close').addEventListener('click', closeModal);
     modalRoot.querySelector('[data-modal-close]').addEventListener('click', closeModal);
-    modalRoot.querySelector('.portfolio-modal__nav--prev').addEventListener('click', () => shiftImage(-1));
-    modalRoot.querySelector('.portfolio-modal__nav--next').addEventListener('click', () => shiftImage(1));
     document.addEventListener('keydown', onKeyDown);
 
     return modalRoot;
