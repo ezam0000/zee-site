@@ -1,6 +1,7 @@
 /**
  * Hero liquid effect (from Modelista particles.js)
- * WebGL2 wave simulation — refracts a background image on cursor movement.
+ * WebGL2 wave simulation — refracts a background image on cursor movement,
+ * with soft ambient ripples (stronger for ~2s after load).
  */
 
 const DEFAULT_BG = "#FFFFFF";
@@ -75,6 +76,10 @@ let frame = 0;
 let clearColor = [0.91, 0.9, 0.89];
 const SIM = 256;
 const REFRACTION = 0.1;
+/** First ~2s: denser, soft ripples so water is alive on load. */
+const INTRO_FRAMES = 120;
+const AMBIENT_INTERVAL = 28;
+const INTRO_INTERVAL = 7;
 
 const VS = `#version 300 es
 layout(location = 0) in vec2 a;
@@ -285,6 +290,15 @@ function onResize() {
   fitCanvas();
 }
 
+function ambientDrop(strength, width) {
+  return {
+    x: 0.18 + Math.random() * 0.64,
+    y: 0.18 + Math.random() * 0.64,
+    s: strength,
+    w: width,
+  };
+}
+
 function loop() {
   if (!gl) return;
   frame++;
@@ -304,11 +318,20 @@ function loop() {
     ds = Math.min(0.35, 0.04 + vel * 8);
     mouse.px = mouse.x;
     mouse.py = mouse.y;
-  } else if (frame % 60 === 0) {
-    dx = 0.15 + Math.random() * 0.7;
-    dy = 0.15 + Math.random() * 0.7;
-    ds = 0.08;
-    dw = 0.002;
+  } else {
+    const intro = frame <= INTRO_FRAMES;
+    const interval = intro ? INTRO_INTERVAL : AMBIENT_INTERVAL;
+    // Seed a few drops immediately so motion is visible on first paint.
+    if (frame === 1 || frame === 4 || frame === 9 || frame % interval === 0) {
+      const drop = ambientDrop(
+        intro ? 0.045 : 0.028,
+        intro ? 0.0045 : 0.0055
+      );
+      dx = drop.x;
+      dy = drop.y;
+      ds = drop.s;
+      dw = drop.w;
+    }
   }
 
   const nxt = 1 - cur;

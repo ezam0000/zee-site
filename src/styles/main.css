@@ -355,7 +355,7 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1.25rem 2rem;
+    gap: 1.25rem 2.75rem;
     margin-top: 7rem;
     padding-top: 1rem;
     width: 100vw;
