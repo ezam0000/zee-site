@@ -3,9 +3,34 @@ import { startSmoothScroll, stopSmoothScroll } from '../core/smooth-scroll.js';
 let modalRoot = null;
 let activeProject = null;
 let previousFocus = null;
+let getProjectBySlug = () => null;
+let defaultTitle = '';
+let historyBound = false;
 
 function getGalleryImages(project) {
     return project.gallery ?? [project.cover];
+}
+
+function locationSlug() {
+    const raw = window.location.hash.replace(/^#/, '');
+    if (!raw) return '';
+    try {
+        return decodeURIComponent(raw).toLowerCase();
+    } catch {
+        return raw.toLowerCase();
+    }
+}
+
+function writeProjectUrl(slug) {
+    const nextHash = slug ? `#${slug}` : '';
+    const currentHash = window.location.hash === '#' ? '' : window.location.hash;
+    if (currentHash === nextHash) return;
+    const url = `${window.location.pathname}${window.location.search}${nextHash}`;
+    history.pushState({ portfolioSlug: slug || null }, '', url);
+}
+
+function syncDocumentTitle(project) {
+    document.title = project ? project.title : defaultTitle;
 }
 
 function renderGallery() {
@@ -46,7 +71,7 @@ function renderProjectDetails() {
     modalRoot.querySelector('.portfolio-modal__body').textContent = activeProject.details;
 }
 
-function closeModal() {
+function closeModal({ fromHistory = false } = {}) {
     if (!modalRoot) return;
 
     modalRoot.classList.remove('is-open');
@@ -55,13 +80,18 @@ function closeModal() {
     activeProject = null;
     startSmoothScroll();
 
+    if (!fromHistory) {
+        writeProjectUrl('');
+    }
+    syncDocumentTitle(null);
+
     if (previousFocus instanceof HTMLElement) {
         previousFocus.focus();
         previousFocus = null;
     }
 }
 
-function openModal(project, trigger) {
+function openModal(project, trigger, { fromHistory = false } = {}) {
     if (!modalRoot) return;
 
     activeProject = project;
@@ -74,6 +104,11 @@ function openModal(project, trigger) {
     modalRoot.setAttribute('aria-hidden', 'false');
     document.body.classList.add('portfolio-modal-open');
 
+    if (!fromHistory) {
+        writeProjectUrl(project.slug);
+    }
+    syncDocumentTitle(project);
+
     // Double rAF so the closed styles paint before opening — enables the CSS transition.
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -82,6 +117,22 @@ function openModal(project, trigger) {
             modalRoot.querySelector('.portfolio-modal__close')?.focus();
         });
     });
+}
+
+function onLocationChange() {
+    const slug = locationSlug();
+    const project = slug ? getProjectBySlug(slug) : null;
+
+    if (project) {
+        if (activeProject?.slug !== project.slug) {
+            openModal(project, null, { fromHistory: true });
+        }
+        return;
+    }
+
+    if (activeProject) {
+        closeModal({ fromHistory: true });
+    }
 }
 
 function onKeyDown(event) {
@@ -142,15 +193,25 @@ function ensureModal() {
         scroller.scrollTop += event.deltaY;
     }, { passive: false });
 
-    modalRoot.querySelector('.portfolio-modal__close').addEventListener('click', closeModal);
-    modalRoot.querySelector('[data-modal-close]').addEventListener('click', closeModal);
+    modalRoot.querySelector('.portfolio-modal__close').addEventListener('click', () => closeModal());
+    modalRoot.querySelector('[data-modal-close]').addEventListener('click', () => closeModal());
     document.addEventListener('keydown', onKeyDown);
 
     return modalRoot;
 }
 
-export function initPortfolioModal() {
+export function initPortfolioModal(options = {}) {
+    getProjectBySlug = options.getProjectBySlug ?? (() => null);
+    defaultTitle = options.defaultTitle ?? document.title;
     ensureModal();
+
+    if (!historyBound) {
+        historyBound = true;
+        window.addEventListener('popstate', onLocationChange);
+        window.addEventListener('hashchange', onLocationChange);
+    }
+
+    onLocationChange();
 }
 
 export function showPortfolioProject(project, trigger) {

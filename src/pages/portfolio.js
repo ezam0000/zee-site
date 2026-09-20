@@ -5,7 +5,7 @@ import { initSmoothScroll } from '../core/smooth-scroll.js';
 export default function initPortfolio() {
     initPortfolioStack();
     initHotjar();
-    initSmoothScroll();
+    initSmoothScroll({ desktopOnly: true });
 }
 
 initPortfolio();

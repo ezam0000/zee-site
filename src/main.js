@@ -7,7 +7,7 @@ import {
 } from './effects/heroLiquid.js';
 import { initFloatingLeaf } from './effects/floatingLeaf.js';
 import { initHeroHeadlines } from './effects/heroHeadlines.js';
-import { prefersReducedMotion } from './utils/perf.js';
+import { prefersReducedMotion, shouldAutoplayMotion } from './utils/perf.js';
 
 function getPageBackgroundColor() {
     if (!document.body.classList.contains('dark-mode')) {
@@ -39,8 +39,10 @@ let heroLiquidActive = false;
 const heroLiquidContainer = document.querySelector('#hero-liquid');
 function bootHeroLiquid() {
     if (!heroLiquidContainer) return;
-    if (prefersReducedMotion()) {
-        console.info('HeroLiquid: off (Reduce Motion is enabled in system settings)');
+    if (!shouldAutoplayMotion()) {
+        if (prefersReducedMotion()) {
+            console.info('HeroLiquid: off (Reduce Motion is enabled in system settings)');
+        }
         return;
     }
     heroLiquidActive = initHeroLiquid(

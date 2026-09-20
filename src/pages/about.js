@@ -3,7 +3,7 @@ import { initSmoothScroll } from '../core/smooth-scroll.js';
 
 export default function initAbout() {
     initHotjar();
-    initSmoothScroll();
+    initSmoothScroll({ desktopOnly: true });
 }
 
 initAbout();

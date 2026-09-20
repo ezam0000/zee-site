@@ -4,6 +4,7 @@ const WORK = '/public/images/work';
 
 const PROJECTS = [
     {
+        slug: 'pixlz',
         title: 'Pixlz',
         meta: 'Branding · Design Systems · Packaging · Art Direction · Retail · Merchandise',
         description: "Pixlz launched to reach a customer segment Grön's other lines weren't serving.",
@@ -17,6 +18,7 @@ const PROJECTS = [
         ],
     },
     {
+        slug: 'gron-halloween',
         title: 'Grön Halloween',
         meta: 'Packaging · Design Systems · Campaign Direction · Illustration · UI Direction · Interaction Design · Merchandise',
         description: "Two years of Grön's Halloween limited-time offer — Bite Club in 2025, Grön Arcana in 2026.",
@@ -31,6 +33,7 @@ const PROJECTS = [
         ],
     },
     {
+        slug: 'pr-kits',
         title: 'PR Kits & Corporate Gifts',
         meta: 'Concept · Product Design · Fabrication · Display Design · Packaging · Client Direction',
         description: 'Custom PR kits, corporate gifts, products, and displays for clients including Nike, Coca-Cola, and the NFL.',
@@ -44,6 +47,7 @@ const PROJECTS = [
         ],
     },
     {
+        slug: 'structural-packaging',
         title: 'Structural Packaging & Fabrication',
         meta: 'Structural Design · Dieline Engineering · CNC/Laser Cutting · Materials · Prototyping',
         description: 'Structural packaging and fabrication work spanning wood, foam, and custom dielines.',
@@ -57,6 +61,7 @@ const PROJECTS = [
         ],
     },
     {
+        slug: 'gron-core',
         title: 'Grön — Core Brand & Marketing',
         meta: 'Packaging · Design Systems · Print Production · Digital Marketing · Regulatory Compliance',
         description: "Ongoing packaging, print, and marketing design across Grön's four core product lines.",
@@ -70,6 +75,7 @@ const PROJECTS = [
         ],
     },
     {
+        slug: 'design-toolbox',
         title: 'Design Toolbox',
         meta: 'Automation · Figma Plugins · Development',
         description: 'Custom scripts, Figma plugins, and small applications built to streamline my own design process.',
@@ -103,6 +109,7 @@ function buildTile(project, image) {
     const tile = document.createElement('button');
     tile.type = 'button';
     tile.className = 'portfolio-tile';
+    tile.dataset.projectSlug = project.slug;
     tile.setAttribute('aria-label', `Open gallery for ${project.title}`);
 
     const frame = document.createElement('div');
@@ -135,11 +142,18 @@ function buildTile(project, image) {
     return tile;
 }
 
+export function getProjectBySlug(slug) {
+    return PROJECTS.find((project) => project.slug === slug) ?? null;
+}
+
 export function initPortfolioStack() {
     const grid = document.getElementById('portfolio-stack');
     if (!grid) return;
 
-    initPortfolioModal();
+    initPortfolioModal({
+        getProjectBySlug,
+        defaultTitle: document.title,
+    });
     grid.className = 'portfolio-grid';
     grid.replaceChildren();
 

@@ -57,9 +57,14 @@ coverage/
 !.cursor/mcp.json
 !.cursor/rules/
 !.cursor/rules/**
+!.cursor/skills/
+!.cursor/skills/**
 *.swp
 *.swo
 *~
 
 # Graphify local knowledge graph
 graphify-out/
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/

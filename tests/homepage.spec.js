@@ -7,7 +7,7 @@ test.describe('Zee Homepage', () => {
   });
 
   test('should load the homepage', async ({ page }) => {
-    await expect(page).toHaveTitle(/Zee/);
+    await expect(page).toHaveTitle('Zee Pauli');
   });
 
   test('should display hero section', async ({ page }) => {
@@ -52,5 +52,67 @@ test.describe('Zee Homepage', () => {
 
     await page.setViewportSize({ width: 1920, height: 1080 });
     await expect(page.locator('.headline')).toBeVisible();
+  });
+});
+
+test.describe('Share and identity metadata', () => {
+  test('homepage has OG image, favicons, and share tags', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'Zee Pauli');
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      'content',
+      'https://zee-studio.com/public/og-image.jpg'
+    );
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+    await expect(page.locator('link[rel="icon"][href="/public/favicon.ico"]')).toHaveCount(1);
+    await expect(page.locator('link[rel="icon"][href="/public/favicon-32.png"]')).toHaveCount(1);
+    await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute(
+      'href',
+      '/public/apple-touch-icon.png'
+    );
+
+    const ogImage = await page.request.get('/public/og-image.jpg');
+    expect(ogImage.ok()).toBeTruthy();
+    const favicon = await page.request.get('/public/favicon-32.png');
+    expect(favicon.ok()).toBeTruthy();
+  });
+
+  test('work page has its own share card', async ({ page }) => {
+    await page.goto('/work/');
+    await expect(page).toHaveTitle('Work');
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'Work');
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      'content',
+      'https://zee-studio.com/work/'
+    );
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://zee-studio.com/work/'
+    );
+  });
+});
+
+test.describe('Mobile targets and work deep links', () => {
+  test('mobile social links meet 44px targets', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    const link = page.locator('.nav-social__link').first();
+    const box = await link.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box.width).toBeGreaterThanOrEqual(44);
+    expect(box.height).toBeGreaterThanOrEqual(44);
+  });
+
+  test('work hash opens the project and updates the tab title', async ({ page }) => {
+    await page.goto('/work/#pixlz');
+    await expect(page.locator('.portfolio-modal')).toHaveClass(/is-open/);
+    await expect(page).toHaveTitle('Pixlz');
+    await expect(page).toHaveURL(/#pixlz$/);
+
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.portfolio-modal')).not.toHaveClass(/is-open/);
+    await expect(page).toHaveTitle('Work');
+    await expect(page).toHaveURL(/\/work\/?$/);
   });
 });
