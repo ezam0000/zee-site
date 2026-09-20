@@ -64,16 +64,31 @@ export function initSelectedWork() {
     projects.forEach((project) => {
         const tile = document.createElement('article');
         tile.className = 'featured-tile';
-        const fitClass = project.fit === 'contain' ? ' featured-image--contain' : '';
-        tile.innerHTML = `
-            <div class="featured-image${fitClass}">
-                <img src="${project.image}" alt="${project.brand} \u2014 ${project.opener.toLowerCase()}" loading="lazy" decoding="async">
-            </div>
-            <h3 class="featured-lede">
-                <em class="lede-opener">${project.opener}</em> ${project.bridge}
-            </h3>
-            <span class="featured-brand">${project.brand}</span>
-        `;
+
+        const media = document.createElement('div');
+        media.className = project.fit === 'contain'
+            ? 'featured-image featured-image--contain'
+            : 'featured-image';
+
+        const img = document.createElement('img');
+        img.src = project.image;
+        img.alt = `${project.brand} \u2014 ${project.opener.toLowerCase()}`;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        media.appendChild(img);
+
+        const lede = document.createElement('h3');
+        lede.className = 'featured-lede';
+        const opener = document.createElement('em');
+        opener.className = 'lede-opener';
+        opener.textContent = project.opener;
+        lede.append(opener, ` ${project.bridge}`);
+
+        const brand = document.createElement('span');
+        brand.className = 'featured-brand';
+        brand.textContent = project.brand;
+
+        tile.append(media, lede, brand);
         grid.appendChild(tile);
     });
 }

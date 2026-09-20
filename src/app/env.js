@@ -3,5 +3,5 @@ export const env = {
   get isProd() {
     return !this.isDev;
   },
-  hotjarEnabled: true, 
+  hotjarEnabled: false,
 };

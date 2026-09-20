@@ -2,26 +2,32 @@ import { createElement } from "../utils/dom.js";
 
 export function renderBeforeAfter(beforeSrc, afterSrc) {
   const slider = createElement("div", "before-after");
-  slider.innerHTML = `
-    <div class="before-after__container">
-      <div class="before-after__before">
-        <img src="${beforeSrc}" alt="Before" />
-      </div>
-      <div class="before-after__after">
-        <img src="${afterSrc}" alt="After" />
-      </div>
-      <input type="range" class="before-after__slider" min="0" max="100" value="50" />
-    </div>
-  `;
+  const container = createElement("div", "before-after__container");
 
-  const sliderInput = slider.querySelector(".before-after__slider");
-  const afterDiv = slider.querySelector(".before-after__after");
+  const before = createElement("div", "before-after__before");
+  const beforeImg = createElement("img");
+  beforeImg.src = beforeSrc;
+  beforeImg.alt = "Before";
+  before.appendChild(beforeImg);
+
+  const after = createElement("div", "before-after__after");
+  const afterImg = createElement("img");
+  afterImg.src = afterSrc;
+  afterImg.alt = "After";
+  after.appendChild(afterImg);
+
+  const sliderInput = document.createElement("input");
+  sliderInput.type = "range";
+  sliderInput.className = "before-after__slider";
+  sliderInput.min = "0";
+  sliderInput.max = "100";
+  sliderInput.value = "50";
 
   sliderInput.addEventListener("input", (e) => {
-    const value = e.target.value;
-    afterDiv.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+    after.style.clipPath = `inset(0 ${100 - e.target.value}% 0 0)`;
   });
 
+  container.append(before, after, sliderInput);
+  slider.appendChild(container);
   return slider;
 }
-

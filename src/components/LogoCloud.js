@@ -2,22 +2,22 @@ import { createElement } from "../utils/dom.js";
 
 export function renderLogoCloud(clients, title = "Clients") {
   const section = createElement("section", "logo-cloud");
-  section.innerHTML = `
-    <div class="container">
-      <h2 class="logo-cloud__title">${title}</h2>
-      <div class="logo-cloud__grid">
-        ${clients
-          .map(
-            (client) => `
-          <div class="logo-cloud__item">
-            <img src="${client.logo}" alt="${client.name}" loading="lazy" />
-          </div>
-        `
-          )
-          .join("")}
-      </div>
-    </div>
-  `;
+  const container = createElement("div", "container");
+  const heading = createElement("h2", "logo-cloud__title", title);
+  const grid = createElement("div", "logo-cloud__grid");
+
+  clients.forEach((client) => {
+    const item = createElement("div", "logo-cloud__item");
+    const img = createElement("img");
+    img.src = client.logo;
+    img.alt = client.name;
+    img.loading = "lazy";
+    item.appendChild(img);
+    grid.appendChild(item);
+  });
+
+  container.appendChild(heading);
+  container.appendChild(grid);
+  section.appendChild(container);
   return section;
 }
-

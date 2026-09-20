@@ -7,10 +7,10 @@ export function renderMetricBar(metrics) {
   const container = createElement("div", "metric-bar__container");
   metrics.forEach((metric) => {
     const item = createElement("div", "metric-bar__item");
-    item.innerHTML = `
-      <span class="metric-bar__value">${metric.value}${metric.unit}</span>
-      <span class="metric-bar__label">${metric.label}</span>
-    `;
+    item.append(
+      createElement("span", "metric-bar__value", `${metric.value}${metric.unit}`),
+      createElement("span", "metric-bar__label", metric.label),
+    );
     container.appendChild(item);
   });
 

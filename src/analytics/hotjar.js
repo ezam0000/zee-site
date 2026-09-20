@@ -1,10 +1,10 @@
 import { env } from "../app/env.js";
 
 export function initHotjar() {
-    if (!env.isProd) return;
+    if (!env.hotjarEnabled || !env.isProd) return;
 
     const hotjarId = "YOUR_HOTJAR_ID";
-    if (!hotjarId || hotjarId === "YOUR_HOTJAR_ID") return;
+    if (!/^\d+$/.test(hotjarId)) return;
 
     (function (h, o, t, j, a, r) {
         h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments); };

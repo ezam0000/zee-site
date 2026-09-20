@@ -19,12 +19,35 @@ export function revealImage(img) {
     img.addEventListener('error', show, { once: true });
 }
 
+function isPublicAssetUrl(url) {
+    return typeof url === 'string'
+        && url.startsWith('/public/')
+        && !url.includes('..')
+        && !url.includes('\\')
+        && !url.includes(':');
+}
+
+function assertPublicAssetUrl(url) {
+    if (!isPublicAssetUrl(url)) {
+        throw new Error('Blocked non-public image URL');
+    }
+}
+
+function assertPublicSrcset(srcset) {
+    String(srcset).split(',').forEach((entry) => {
+        assertPublicAssetUrl(entry.trim().split(/\s+/, 1)[0]);
+    });
+}
+
 export function applyResponsiveImage(img, asset, {
     sizes,
     eager = false,
     preferLarge = false,
 } = {}) {
-    img.src = preferLarge ? asset.srcLarge : asset.src;
+    const src = preferLarge ? asset.srcLarge : asset.src;
+    assertPublicAssetUrl(src);
+    assertPublicSrcset(asset.srcset);
+    img.src = src;
     img.srcset = asset.srcset;
     if (sizes) img.sizes = sizes;
     img.decoding = 'async';

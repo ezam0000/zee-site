@@ -4,22 +4,22 @@ export function renderCaseHero(caseData) {
   const hero = createElement("section", "case-hero");
 
   const picture = createElement("picture", "case-hero__image");
-  picture.innerHTML = `
-    <source media="(max-width: 768px)" srcset="${caseData.hero.mobile}" />
-    <img src="${caseData.hero.desktop}" alt="${caseData.hero.alt}" />
-  `;
+  const source = document.createElement("source");
+  source.media = "(max-width: 768px)";
+  source.srcset = caseData.hero.mobile;
+  const img = createElement("img");
+  img.src = caseData.hero.desktop;
+  img.alt = caseData.hero.alt;
+  picture.append(source, img);
 
   const content = createElement("div", "case-hero__content");
-  content.innerHTML = `
-    <div class="container">
-      <h1 class="case-hero__title">${caseData.title}</h1>
-      <p class="case-hero__client">${caseData.client}</p>
-    </div>
-  `;
+  const container = createElement("div", "container");
+  container.append(
+    createElement("h1", "case-hero__title", caseData.title),
+    createElement("p", "case-hero__client", caseData.client),
+  );
+  content.appendChild(container);
 
-  hero.appendChild(picture);
-  hero.appendChild(content);
-
+  hero.append(picture, content);
   return hero;
 }
-

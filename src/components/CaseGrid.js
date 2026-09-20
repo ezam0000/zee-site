@@ -16,10 +16,10 @@ export function renderCaseGrid(cases) {
     thumbnail.appendChild(img);
 
     const content = createElement("div", "case-card__content");
-    content.innerHTML = `
-      <h3 class="case-card__title">${caseStudy.title}</h3>
-      <p class="case-card__client">${caseStudy.client}</p>
-    `;
+    content.append(
+      createElement("h3", "case-card__title", caseStudy.title),
+      createElement("p", "case-card__client", caseStudy.client),
+    );
 
     const metrics = renderImpactMetrics(caseStudy.metrics.slice(0, 1), "grid");
     metrics.className = "case-card__metrics";
