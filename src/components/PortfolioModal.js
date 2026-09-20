@@ -71,11 +71,17 @@ function openModal(project, trigger) {
     renderGallery();
 
     stopSmoothScroll();
-    modalRoot.classList.add('is-open');
     modalRoot.setAttribute('aria-hidden', 'false');
     document.body.classList.add('portfolio-modal-open');
 
-    modalRoot.querySelector('.portfolio-modal__close').focus();
+    // Double rAF so the closed styles paint before opening — enables the CSS transition.
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            if (!modalRoot || activeProject !== project) return;
+            modalRoot.classList.add('is-open');
+            modalRoot.querySelector('.portfolio-modal__close')?.focus();
+        });
+    });
 }
 
 function onKeyDown(event) {

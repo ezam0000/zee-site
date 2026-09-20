@@ -1,9 +1,9 @@
 /**
- * Contact form → mailto:hello@zee-studio.com
+ * Contact form → mailto:zee.pauli@outlook.com
  * Opens the visitor's email client with the form fields filled in.
  */
 
-const CONTACT_EMAIL = "hello@zee-studio.com";
+const CONTACT_EMAIL = "zee.pauli@outlook.com";
 
 export function handleFormSubmission(form, { onSubmit } = {}) {
   form.addEventListener("submit", (e) => {
