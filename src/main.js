@@ -1,6 +1,7 @@
 import { initHotjar } from './analytics/hotjar.js';
 import { config } from './app/config.js';
 import { initSmoothScroll } from './core/smooth-scroll.js';
+import { initPageTransitions } from './core/transitions.js';
 import {
     init as initHeroLiquid,
     setBackgroundImage as setHeroLiquidBackground,
@@ -67,6 +68,7 @@ if (themeToggle) {
 
 // Initialize Analytics
 initHotjar();
+initPageTransitions();
 
 function bootScrollEffects() {
     initHeroHeadlines();

@@ -1,4 +1,7 @@
 import { startSmoothScroll, stopSmoothScroll } from '../core/smooth-scroll.js';
+import { applyResponsiveImage } from '../utils/images.js';
+
+const GALLERY_SIZES = '(max-width: 900px) 100vw, 55vw';
 
 let modalRoot = null;
 let activeProject = null;
@@ -49,10 +52,12 @@ function renderGallery() {
 
         const img = document.createElement('img');
         img.className = 'portfolio-modal__image';
-        img.src = src;
         img.alt = `${activeProject.title} — image ${index + 1} of ${images.length}`;
-        img.loading = index === 0 ? 'eager' : 'lazy';
-        img.decoding = 'async';
+        applyResponsiveImage(img, src, {
+            sizes: GALLERY_SIZES,
+            eager: index === 0,
+            preferLarge: true,
+        });
 
         media.appendChild(img);
         figure.appendChild(media);

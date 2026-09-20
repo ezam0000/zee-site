@@ -523,8 +523,8 @@ body.portfolio-modal-open {
     visibility: hidden;
     pointer-events: none;
     transition:
-        opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.2s ease-out,
+        visibility 0.2s ease-out;
 }
 
 .portfolio-modal.is-open {
@@ -537,12 +537,6 @@ body.portfolio-modal-open {
     position: absolute;
     inset: 0;
     background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(0);
-    transition: backdrop-filter 0.45s ease;
-}
-
-.portfolio-modal.is-open .portfolio-modal__backdrop {
-    backdrop-filter: blur(8px);
 }
 
 .portfolio-modal__dialog {
@@ -555,32 +549,11 @@ body.portfolio-modal-open {
     box-shadow:
         0 8px 24px rgba(0, 0, 0, 0.08),
         0 24px 64px rgba(0, 0, 0, 0.12);
-    transform: translateY(0.85rem) scale(0.985);
-    opacity: 0.88;
-    transition:
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.portfolio-modal.is-open .portfolio-modal__dialog {
-    transform: translateY(0) scale(1);
-    opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .portfolio-modal,
-    .portfolio-modal__backdrop,
-    .portfolio-modal__dialog {
+    .portfolio-modal {
         transition: none;
-    }
-
-    .portfolio-modal__dialog {
-        transform: none;
-        opacity: 1;
-    }
-
-    .portfolio-modal__backdrop {
-        backdrop-filter: blur(8px);
     }
 }
 

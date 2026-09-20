@@ -531,6 +531,36 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
     outline-offset: 2px;
 }
 
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+}
+
+.img-reveal {
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+
+.img-reveal.is-loaded {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
+
+    .img-reveal {
+        opacity: 1;
+        transition: none;
+    }
+}
+
 @media (min-width: 769px) {
     .theme-switch-container {
         top: 28px;

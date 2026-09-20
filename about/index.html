@@ -26,10 +26,10 @@
     <link rel="icon" href="/public/favicon.ico" sizes="any">
     <link rel="icon" href="/public/favicon-32.png" type="image/png" sizes="32x32">
     <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
-    <link rel="stylesheet" href="/src/styles/main.css?v=1.0.0">
+    <link rel="stylesheet" href="/src/styles/main.css?v=1.0.2">
     <link rel="stylesheet" href="/src/styles/desktop.css?v=1.0.0" media="(min-width: 769px)">
     <link rel="stylesheet" href="/src/styles/mobile.css?v=1.0.0" media="(max-width: 768px)">
-    <link rel="stylesheet" href="/src/styles/portfolio.css?v=1.0.0">
+    <link rel="stylesheet" href="/src/styles/portfolio.css?v=1.0.2">
         <script type="importmap">
         {
             "imports": {
@@ -80,7 +80,16 @@
                     <figure class="about-headshot">
                         <div class="about-headshot__frame">
                             <div class="about-headshot__media">
-                                <img src="/public/images/zee-headshot.jpg" alt="Zee Pauli" width="600" height="750" decoding="async">
+                                <img
+                                    class="img-reveal"
+                                    src="/public/images/zee-headshot-720.webp"
+                                    srcset="/public/images/zee-headshot-720.webp 720w, /public/images/zee-headshot-1400.webp 1400w"
+                                    sizes="(max-width: 768px) 220px, 280px"
+                                    alt="Zee Pauli"
+                                    width="600"
+                                    height="750"
+                                    decoding="async"
+                                >
                             </div>
                         </div>
                     </figure>
@@ -143,6 +152,6 @@
         </div>
     </div>
 
-    <script type="module" src="/src/pages/about.js"></script>
+    <script type="module" src="/src/pages/about.js?v=1.0.2"></script>
 </body>
 </html>

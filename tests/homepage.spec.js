@@ -115,4 +115,37 @@ test.describe('Mobile targets and work deep links', () => {
     await expect(page).toHaveTitle('Work');
     await expect(page).toHaveURL(/\/work\/?$/);
   });
+
+  test('work and about links navigate from the homepage', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('link', { name: 'work' }).click();
+    await expect(page).toHaveURL(/\/work\/?$/);
+    await expect(page).toHaveTitle('Work');
+
+    await page.goto('/');
+    await page.getByRole('link', { name: 'about' }).click();
+    await expect(page).toHaveURL(/\/about\/?$/);
+    await expect(page).toHaveTitle('About');
+  });
+
+  test('work tiles and modal gallery use sized webp sources', async ({ page }) => {
+    await page.goto('/work/');
+    const tileImg = page.locator('.portfolio-tile img').first();
+    await expect(tileImg).toHaveAttribute('src', /\.webp$/);
+    await expect(tileImg).toHaveAttribute('srcset', /720w/);
+    await expect(tileImg).toHaveAttribute('srcset', /1400w/);
+
+    await page.locator('.portfolio-tile').first().click();
+    await expect(page.locator('.portfolio-modal')).toHaveClass(/is-open/);
+    const modalImg = page.locator('.portfolio-modal__image').first();
+    await expect(modalImg).toHaveAttribute('src', /\.webp$/);
+    await expect(modalImg).toHaveAttribute('srcset', /1400w/);
+  });
+
+  test('about headshot uses sized webp', async ({ page }) => {
+    await page.goto('/about/');
+    const img = page.locator('.about-headshot img');
+    await expect(img).toHaveAttribute('src', /zee-headshot-720\.webp$/);
+    await expect(img).toHaveAttribute('srcset', /1400w/);
+  });
 });
