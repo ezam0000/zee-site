@@ -17,7 +17,7 @@ const PROJECTS = [
         ],
     },
     {
-        title: 'Grön Halloween — Bite Club / Grön Arcana',
+        title: 'Grön Halloween',
         meta: 'Packaging · Design Systems · Campaign Direction · Illustration · UI Direction · Interaction Design · Merchandise',
         description: "Two years of Grön's Halloween limited-time offer — Bite Club in 2025, Grön Arcana in 2026.",
         details: 'Packaging, design systems, and creative direction for both campaigns, each built as its own world rather than a refresh of the last. Bite Club introduced a vampire secret society, with packaging, merchandise, and microsite UI direction built around it. Grön Arcana followed with a tarot ritual concept, built around a custom digital tarot reading experience — its own microsite, its own mechanic. Pitch decks and creative presentations for both campaigns shipped across Grön\'s multi-state retail footprint.',
