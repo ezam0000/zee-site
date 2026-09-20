@@ -80,8 +80,11 @@ test.describe('Share and identity metadata', () => {
 
   test('work page has its own share card', async ({ page }) => {
     await page.goto('/work/');
-    await expect(page).toHaveTitle('Work');
-    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'Work');
+    await expect(page).toHaveTitle('Work — Zee Pauli');
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      'Work — Zee Pauli'
+    );
     await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
       'content',
       'https://zee-studio.com/work/'
@@ -91,7 +94,50 @@ test.describe('Share and identity metadata', () => {
       'https://zee-studio.com/work/'
     );
   });
+
+  test('robots.txt and sitemap list the public pages', async ({ request }) => {
+    const robots = await request.get('/robots.txt');
+    expect(robots.ok()).toBeTruthy();
+    const robotsBody = await robots.text();
+    expect(robotsBody).toContain('Sitemap: https://zee-studio.com/sitemap.xml');
+
+    const sitemap = await request.get('/sitemap.xml');
+    expect(sitemap.ok()).toBeTruthy();
+    const sitemapBody = await sitemap.text();
+    expect(sitemapBody).toContain('https://zee-studio.com/');
+    expect(sitemapBody).toContain('https://zee-studio.com/work/');
+    expect(sitemapBody).toContain('https://zee-studio.com/about/');
+  });
+
+  test('homepage JSON-LD describes Person and WebSite', async ({ page }) => {
+    await page.goto('/');
+    const graph = await jsonLdGraph(page);
+    const types = graph.map((node) => node['@type']);
+    expect(types).toEqual(expect.arrayContaining(['Person', 'WebSite', 'WebPage']));
+    const person = graph.find((node) => node['@type'] === 'Person');
+    expect(person['@id']).toBe('https://zee-studio.com/#person');
+    expect(person.sameAs).toEqual(expect.arrayContaining([
+      'https://www.behance.net/zee-design',
+      'https://www.linkedin.com/in/zee-studio',
+      'https://www.instagram.com/zee.24',
+    ]));
+  });
+
+  test('work JSON-LD lists selected projects', async ({ page }) => {
+    await page.goto('/work/');
+    const graph = await jsonLdGraph(page);
+    const list = graph.find((node) => node['@type'] === 'ItemList');
+    expect(list.numberOfItems).toBe(6);
+    const names = list.itemListElement.map((entry) => entry.item.name);
+    expect(names).toContain('Pixlz');
+  });
 });
+
+async function jsonLdGraph(page) {
+  const raw = await page.locator('script[type="application/ld+json"]').first().textContent();
+  const data = JSON.parse(raw);
+  return data['@graph'] ?? [data];
+}
 
 test.describe('Mobile targets and work deep links', () => {
   test('mobile social links meet 44px targets', async ({ page }) => {
@@ -112,7 +158,7 @@ test.describe('Mobile targets and work deep links', () => {
 
     await page.keyboard.press('Escape');
     await expect(page.locator('.portfolio-modal')).not.toHaveClass(/is-open/);
-    await expect(page).toHaveTitle('Work');
+    await expect(page).toHaveTitle('Work — Zee Pauli');
     await expect(page).toHaveURL(/\/work\/?$/);
   });
 
@@ -120,12 +166,12 @@ test.describe('Mobile targets and work deep links', () => {
     await page.goto('/');
     await page.getByRole('link', { name: 'work' }).click();
     await expect(page).toHaveURL(/\/work\/?$/);
-    await expect(page).toHaveTitle('Work');
+    await expect(page).toHaveTitle('Work — Zee Pauli');
 
     await page.goto('/');
     await page.getByRole('link', { name: 'about' }).click();
     await expect(page).toHaveURL(/\/about\/?$/);
-    await expect(page).toHaveTitle('About');
+    await expect(page).toHaveTitle('About — Zee Pauli');
   });
 
   test('work tiles and modal gallery use sized webp sources', async ({ page }) => {

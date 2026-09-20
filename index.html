@@ -8,11 +8,8 @@
     <title>Zee Pauli</title>
     <meta name="title" content="Zee Pauli">
     <meta name="description" content="Senior designer specializing in packaging, brand systems, and physical product design. Designer at Grön. Work with spirits, edibles, and premium CPG brands.">
-    <meta name="keywords" content="packaging design, brand systems, physical product design, spirits packaging, cannabis packaging, Portland designer, Zee Pauli, Grön">
     <meta name="author" content="Zee Pauli">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
     <link rel="canonical" href="https://zee-studio.com/">
     
     <!-- Open Graph / Facebook -->
@@ -42,11 +39,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
     
-    <!-- Cache Control -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    
     <!-- Favicon -->
     <link rel="icon" href="/public/favicon.ico" sizes="any">
     <link rel="icon" href="/public/favicon-32.png" type="image/png" sizes="32x32">
@@ -64,37 +56,56 @@
     <link rel="stylesheet" href="/src/styles/dark-mode-desktop.css?v=1.0.0" media="(min-width: 769px)">
     <link rel="stylesheet" href="/src/styles/dark-mode-mobile.css?v=1.0.0" media="(max-width: 768px)">
     
-    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Zee Pauli",
-      "url": "https://zee-studio.com",
-      "jobTitle": "Senior Designer",
-      "description": "Senior designer specializing in packaging, brand systems, and physical product design.",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Grön"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Portland",
-        "addressRegion": "OR",
-        "addressCountry": "US"
-      },
-      "sameAs": [
-        "https://www.behance.net/zee-design"
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://zee-studio.com/#person",
+          "name": "Zee Pauli",
+          "url": "https://zee-studio.com/",
+          "image": "https://zee-studio.com/public/images/zee-headshot-1400.webp",
+          "email": "mailto:zee.pauli@outlook.com",
+          "jobTitle": "Senior Designer",
+          "description": "Senior designer specializing in packaging, brand systems, and physical product design.",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Grön"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Portland",
+            "addressRegion": "OR",
+            "addressCountry": "US"
+          },
+          "sameAs": [
+            "https://www.behance.net/zee-design",
+            "https://www.linkedin.com/in/zee-studio",
+            "https://www.instagram.com/zee.24"
+          ],
+          "knowsAbout": [
+            "Packaging design",
+            "Brand systems",
+            "Physical product design"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://zee-studio.com/#website",
+          "name": "Zee Pauli",
+          "url": "https://zee-studio.com/",
+          "publisher": { "@id": "https://zee-studio.com/#person" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://zee-studio.com/",
+          "url": "https://zee-studio.com/",
+          "name": "Zee Pauli",
+          "isPartOf": { "@id": "https://zee-studio.com/#website" },
+          "about": { "@id": "https://zee-studio.com/#person" }
+        }
       ]
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Zee Pauli",
-      "url": "https://zee-studio.com"
     }
     </script>
 
