@@ -50,6 +50,9 @@ coverage/
 # Design source (not site assets)
 *.pxd
 
+# Local Chrome DevTools workspace
+.well-known/appspecific/
+
 # Editors / local tooling
 .idea/
 .vscode/
