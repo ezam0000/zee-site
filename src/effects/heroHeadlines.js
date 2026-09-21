@@ -1,4 +1,4 @@
-import { shouldAutoplayMotion } from '../utils/perf.js';
+import { prefersReducedMotion } from '../utils/perf.js';
 
 function easeInOutQuart(value) {
     return value < 0.5
@@ -13,7 +13,7 @@ export function initHeroHeadlines() {
     const headlines = [...document.querySelectorAll('.hero-headlines .headline__word')];
     if (!headlines.length) return;
 
-    if (!shouldAutoplayMotion()) {
+    if (prefersReducedMotion()) {
         headlines.forEach((headline, index) => {
             headline.style.opacity = index === 0 ? '1' : '0';
             headline.style.pointerEvents = index === 0 ? 'auto' : 'none';
