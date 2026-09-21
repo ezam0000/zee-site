@@ -8,7 +8,7 @@ import {
 } from './effects/heroLiquid.js';
 import { initFloatingLeaf } from './effects/floatingLeaf.js';
 import { initHeroHeadlines } from './effects/heroHeadlines.js';
-import { prefersReducedMotion, shouldAutoplayMotion } from './utils/perf.js';
+import { prefersReducedMotion } from './utils/perf.js';
 
 function getPageBackgroundColor() {
     if (!document.body.classList.contains('dark-mode')) {
@@ -24,8 +24,18 @@ function getHeroLiquidImageUrl() {
         : heroLiquidBackgrounds.light;
 }
 
+function applyHeroLiquidFallback(imageUrl) {
+    if (!heroLiquidContainer) return;
+    heroLiquidContainer.style.backgroundImage = `url("${imageUrl}")`;
+    heroLiquidContainer.style.backgroundSize = 'cover';
+    heroLiquidContainer.style.backgroundPosition = 'center';
+    heroLiquidContainer.style.backgroundRepeat = 'no-repeat';
+}
+
 function syncHeroLiquidBackground() {
-    setHeroLiquidBackground(getHeroLiquidImageUrl(), getPageBackgroundColor());
+    const imageUrl = getHeroLiquidImageUrl();
+    applyHeroLiquidFallback(imageUrl);
+    setHeroLiquidBackground(imageUrl, getPageBackgroundColor());
 }
 
 // Light by default. Dark preference is ignored while the theme toggle is hidden.
@@ -40,16 +50,16 @@ let heroLiquidActive = false;
 const heroLiquidContainer = document.querySelector('#hero-liquid');
 function bootHeroLiquid() {
     if (!heroLiquidContainer) return;
-    if (!shouldAutoplayMotion()) {
-        if (prefersReducedMotion()) {
-            console.info('HeroLiquid: off (Reduce Motion is enabled in system settings)');
-        }
+
+    const imageUrl = getHeroLiquidImageUrl();
+    applyHeroLiquidFallback(imageUrl);
+
+    // Still show the photo on mobile; only skip the WebGL water for Reduce Motion.
+    if (prefersReducedMotion()) {
+        console.info('HeroLiquid: motion off (Reduce Motion is enabled in system settings)');
         return;
     }
-    heroLiquidActive = initHeroLiquid(
-        heroLiquidContainer,
-        getHeroLiquidImageUrl()
-    );
+    heroLiquidActive = initHeroLiquid(heroLiquidContainer, imageUrl);
 }
 requestAnimationFrame(() => requestAnimationFrame(bootHeroLiquid));
 
