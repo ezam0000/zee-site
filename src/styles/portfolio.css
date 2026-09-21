@@ -269,6 +269,10 @@ body.portfolio-page .logo-link:active {
     background-size: 140px 140px;
 }
 
+.portfolio-tile__media--blank::after {
+    display: none;
+}
+
 .portfolio-tile__overlay {
     position: absolute;
     inset: 0;
@@ -613,19 +617,6 @@ body.portfolio-modal-open {
     width: 100%;
     overflow: hidden;
     background: #ECEAE6;
-}
-
-.portfolio-modal__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.6;
-    mix-blend-mode: multiply;
-    background-image: var(--grain-image);
-    background-repeat: repeat;
-    background-size: 220px 220px;
 }
 
 .portfolio-modal__image {

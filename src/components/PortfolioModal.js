@@ -11,7 +11,8 @@ let defaultTitle = '';
 let historyBound = false;
 
 function getGalleryImages(project) {
-    return project.gallery ?? [project.cover];
+    const images = project.gallery ?? (project.cover ? [project.cover] : []);
+    return images.filter(Boolean);
 }
 
 function locationSlug() {
