@@ -342,7 +342,7 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
 
 .headline {
     font-family: var(--font-serif);
-    font-size: clamp(4rem, 8.8vw, 9rem);
+    font-size: clamp(4.6rem, 10.12vw, 10.35rem);
     line-height: 1.05;
     font-weight: 300;
     margin: 0;
