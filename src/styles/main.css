@@ -80,6 +80,7 @@
 }
 
 html {
+    font-size: 80%;
     -ms-overflow-style: none;
     scrollbar-width: none;
     overflow-x: hidden;
@@ -93,7 +94,7 @@ body {
     font-family: var(--font-sans);
     margin: 0;
     -webkit-font-smoothing: antialiased;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.75;
     overflow-x: hidden;
     max-width: 100%;
@@ -341,7 +342,7 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
 
 .headline {
     font-family: var(--font-serif);
-    font-size: clamp(4rem, 11vw, 9rem);
+    font-size: clamp(4rem, 8.8vw, 9rem);
     line-height: 1.05;
     font-weight: 300;
     margin: 0;
