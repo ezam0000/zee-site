@@ -70,6 +70,7 @@ const PROJECTS = [
             workImage('pr-kits-detail-landscape-3'),
             workImage('pr-kits-detail-landscape-4'),
             workImage('pr-kits-detail-landscape-5'),
+            workImage('pr-kits-detail-landscape-6'),
         ],
     },
     {
