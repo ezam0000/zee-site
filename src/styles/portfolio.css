@@ -256,19 +256,6 @@ body.portfolio-page .logo-link:active {
     background: #ECEAE6;
 }
 
-.portfolio-tile__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.48;
-    mix-blend-mode: soft-light;
-    background-image: var(--grain-image);
-    background-repeat: repeat;
-    background-size: 140px 140px;
-}
-
 .portfolio-tile__media--blank::after {
     display: none;
 }
@@ -329,7 +316,6 @@ body.portfolio-page .logo-link:active {
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: grayscale(1) contrast(0.96) brightness(1.02);
 }
 
 .portfolio-tile__label {

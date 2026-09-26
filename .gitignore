@@ -50,6 +50,10 @@ coverage/
 # Design source (not site assets)
 *.pxd
 
+# Figma PNG staging (keep folder structure via .gitkeep; don't commit large exports)
+figma-exports/**/*
+!figma-exports/**/.gitkeep
+
 # Local Chrome DevTools workspace
 .well-known/appspecific/
 
