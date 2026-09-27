@@ -100,7 +100,9 @@ const PROJECTS = [
         description: 'Custom scripts, Figma plugins, and small applications built to streamline my own design process.',
         details: 'Adobe ExtendScript automation for repetitive production tasks, including a script that builds sized artboards for retail display panels. Custom Figma plugins built for my own workflow. Small applications built and deployed with Cursor, GitHub, Supabase, and Vercel. The goal isn\'t more output. It\'s time returned — clearing the repetitive work so there\'s more room for the parts of the process that still require a person: taste, composition, and direction.',
         cover: workImage('design-toolbox-project-card'),
-        gallery: [],
+        gallery: [
+            workImage('design-toolbox-detail-landscape-1'),
+        ],
     },
 ];
 
