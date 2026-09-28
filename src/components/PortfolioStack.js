@@ -10,6 +10,23 @@ function workImage(stem) {
 
 const PROJECTS = [
     {
+        slug: 'gron-core',
+        title: 'Grön — Core Brand & Marketing',
+        meta: 'Packaging · Design Systems · Print Production · Digital Marketing · Regulatory Compliance',
+        description: "Ongoing packaging, print, and marketing design across Grön's four core product lines.",
+        details: 'Packaging design and updates across Pearls, MEGA, Pips, and Chocolate, prepared as final artwork and proofed for print. Digital and retail marketing assets across email, social media, web banners, and point-of-purchase materials, adapted for each placement and market. Every piece built to meet multi-state cannabis packaging requirements.',
+        cover: workImage('gron-core-project-card'),
+        gallery: [
+            workImage('gron-core-detail-landscape-1'),
+            workImage('gron-core-detail-landscape-2'),
+            workImage('gron-core-detail-landscape-3'),
+            workImage('gron-core-detail-landscape-4'),
+            workImage('gron-core-detail-landscape-5'),
+            workImage('gron-core-detail-landscape-6'),
+            workImage('gron-core-detail-landscape-7'),
+        ],
+    },
+    {
         slug: 'pixlz',
         title: 'Pixlz',
         meta: 'Branding · Design Systems · Packaging · Art Direction · Retail · Merchandise',
@@ -41,23 +58,6 @@ const PROJECTS = [
             workImage('gron-halloween-detail-landscape-5'),
             workImage('gron-halloween-detail-landscape-6'),
             workImage('gron-halloween-detail-landscape-7'),
-        ],
-    },
-    {
-        slug: 'gron-core',
-        title: 'Grön — Core Brand & Marketing',
-        meta: 'Packaging · Design Systems · Print Production · Digital Marketing · Regulatory Compliance',
-        description: "Ongoing packaging, print, and marketing design across Grön's four core product lines.",
-        details: 'Packaging design and updates across Pearls, MEGA, Pips, and Chocolate, prepared as final artwork and proofed for print. Digital and retail marketing assets across email, social media, web banners, and point-of-purchase materials, adapted for each placement and market. Every piece built to meet multi-state cannabis packaging requirements.',
-        cover: workImage('gron-core-project-card'),
-        gallery: [
-            workImage('gron-core-detail-landscape-1'),
-            workImage('gron-core-detail-landscape-2'),
-            workImage('gron-core-detail-landscape-3'),
-            workImage('gron-core-detail-landscape-4'),
-            workImage('gron-core-detail-landscape-5'),
-            workImage('gron-core-detail-landscape-6'),
-            workImage('gron-core-detail-landscape-7'),
         ],
     },
     {
