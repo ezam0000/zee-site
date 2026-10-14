@@ -70,6 +70,13 @@ let fb = [null, null];
 let cur = 0;
 let prog = {};
 let animId = null;
+let quadBuffer = null;
+let loopRunning = false;
+let listenersBound = false;
+let imageToken = 0;
+let resizeNeeded = false;
+let currentSourceUrl = "";
+let currentCanvasSource = null;
 const mouse = { x: -1, y: -1, px: -1, py: -1 };
 let cover = [1, 1, 0, 0];
 let frame = 0;
@@ -150,7 +157,11 @@ function compileShader(type, source) {
 function link(vs, fs) {
   const vert = compileShader(gl.VERTEX_SHADER, vs);
   const frag = compileShader(gl.FRAGMENT_SHADER, fs);
-  if (!vert || !frag) return null;
+  if (!vert || !frag) {
+    if (vert) gl.deleteShader(vert);
+    if (frag) gl.deleteShader(frag);
+    return null;
+  }
 
   const p = gl.createProgram();
   gl.attachShader(p, vert);
@@ -178,8 +189,8 @@ function link(vs, fs) {
 function initQuad() {
   vao = gl.createVertexArray();
   gl.bindVertexArray(vao);
-  const b = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, b);
+  quadBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
   gl.bufferData(
     gl.ARRAY_BUFFER,
     new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
@@ -287,7 +298,7 @@ function onPointerLeave() {
 }
 
 function onResize() {
-  fitCanvas();
+  resizeNeeded = true;
 }
 
 function ambientDrop(strength, width) {
@@ -300,7 +311,11 @@ function ambientDrop(strength, width) {
 }
 
 function loop() {
-  if (!gl) return;
+  if (!loopRunning || !gl) return;
+  if (resizeNeeded) {
+    resizeNeeded = false;
+    fitCanvas();
+  }
   frame++;
 
   let dx = -1;
@@ -340,8 +355,6 @@ function loop() {
   gl.viewport(0, 0, SIM, SIM);
   gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, fb[cur].t);
-  gl.uniform1i(w.u.s, 0);
-  gl.uniform1f(w.u.damp, 0.985);
   gl.uniform4f(w.u.drop, dx, dy, ds, dw);
   blit(fb[nxt].f);
   cur = nxt;
@@ -356,11 +369,8 @@ function loop() {
     gl.useProgram(d.p);
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, heroTex);
-    gl.uniform1i(d.u.hero, 0);
     gl.activeTexture(gl.TEXTURE1);
     gl.bindTexture(gl.TEXTURE_2D, fb[cur].t);
-    gl.uniform1i(d.u.rip, 1);
-    gl.uniform1f(d.u.ref, REFRACTION);
     gl.uniform4f(d.u.cvr, cover[0], cover[1], cover[2], cover[3]);
     blit(null);
   }
@@ -374,14 +384,171 @@ function setClearColorFromHex(hex) {
 }
 
 function loadImageUrl(imageUrl) {
+  currentSourceUrl = imageUrl;
+  currentCanvasSource = null;
+  const token = ++imageToken;
   const img = new Image();
-  img.onload = () => setHeroSource(img);
-  img.onerror = () => console.warn("HeroLiquid: failed to load image", imageUrl);
+  img.onload = () => {
+    if (token !== imageToken || !gl) return;
+    setHeroSource(img);
+  };
+  img.onerror = () => {
+    if (token !== imageToken) return;
+    console.warn("HeroLiquid: failed to load image", imageUrl);
+  };
   img.src = imageUrl;
 }
 
+function stopLoop() {
+  loopRunning = false;
+  if (animId) cancelAnimationFrame(animId);
+  animId = null;
+}
+
+function startLoop() {
+  if (loopRunning || !gl || document.hidden) return;
+  loopRunning = true;
+  animId = requestAnimationFrame(loop);
+}
+
+function resetPointer() {
+  mouse.x = -1;
+  mouse.y = -1;
+  mouse.px = -1;
+  mouse.py = -1;
+}
+
+function revealCssFallback() {
+  if (canvas) canvas.hidden = true;
+}
+
+function bindStaticUniforms() {
+  if (!gl || !prog.wave || !prog.show) return;
+  gl.useProgram(prog.wave.p);
+  gl.uniform1i(prog.wave.u.s, 0);
+  gl.uniform1f(prog.wave.u.damp, 0.985);
+  gl.useProgram(prog.show.p);
+  gl.uniform1i(prog.show.u.hero, 0);
+  gl.uniform1i(prog.show.u.rip, 1);
+  gl.uniform1f(prog.show.u.ref, REFRACTION);
+}
+
+function releaseGpu(deleteResources) {
+  if (deleteResources && gl) {
+    if (prog.wave?.p) gl.deleteProgram(prog.wave.p);
+    if (prog.show?.p) gl.deleteProgram(prog.show.p);
+    fb.forEach((slot) => {
+      if (!slot) return;
+      gl.deleteFramebuffer(slot.f);
+      gl.deleteTexture(slot.t);
+    });
+    if (heroTex) gl.deleteTexture(heroTex);
+    if (quadBuffer) gl.deleteBuffer(quadBuffer);
+    if (vao) gl.deleteVertexArray(vao);
+  }
+  prog = {};
+  fb = [null, null];
+  heroTex = null;
+  quadBuffer = null;
+  vao = null;
+}
+
+function onVisibilityChange() {
+  if (document.hidden) {
+    stopLoop();
+    return;
+  }
+  resetPointer();
+  if (!gl) return;
+  if (canvas) canvas.hidden = false;
+  startLoop();
+}
+
+function onPageHide() {
+  stopLoop();
+}
+
+function onPageShow() {
+  if (document.hidden || !gl) return;
+  resetPointer();
+  startLoop();
+}
+
+function onContextLost(event) {
+  event.preventDefault();
+  stopLoop();
+  releaseGpu(false);
+  gl = null;
+  revealCssFallback();
+}
+
+function rebuildGpu() {
+  if (!gl) return false;
+  if (!gl.getExtension("EXT_color_buffer_float")) return false;
+  gl.getExtension("OES_texture_float_linear");
+  prog.wave = link(VS, WAVE);
+  prog.show = link(VS, SHOW);
+  if (!prog.wave || !prog.show) return false;
+  initQuad();
+  fb[0] = makeFBO();
+  fb[1] = makeFBO();
+  if (!fb[0] || !fb[1]) return false;
+  bindStaticUniforms();
+  if (currentCanvasSource) setHeroSource(currentCanvasSource);
+  else if (currentSourceUrl) loadImageUrl(currentSourceUrl);
+  return true;
+}
+
+function onContextRestored() {
+  if (!canvas) return;
+  const savedFrame = frame;
+  gl = canvas.getContext("webgl2", {
+    alpha: false,
+    antialias: false,
+    depth: false,
+    stencil: false,
+  });
+  if (!gl || !rebuildGpu()) {
+    revealCssFallback();
+    return;
+  }
+  frame = savedFrame;
+  canvas.hidden = false;
+  if (!document.hidden) startLoop();
+}
+
+function bindListeners() {
+  if (listenersBound) return;
+  listenersBound = true;
+  window.addEventListener("pointermove", onMove, { passive: true });
+  window.addEventListener("pointerdown", onMove, { passive: true });
+  window.addEventListener("touchmove", onTouch, { passive: true });
+  window.addEventListener("pointerleave", onPointerLeave);
+  window.addEventListener("resize", onResize);
+  document.addEventListener("visibilitychange", onVisibilityChange);
+  window.addEventListener("pagehide", onPageHide);
+  window.addEventListener("pageshow", onPageShow);
+  canvas.addEventListener("webglcontextlost", onContextLost);
+  canvas.addEventListener("webglcontextrestored", onContextRestored);
+}
+
+function unbindListeners() {
+  if (!listenersBound) return;
+  listenersBound = false;
+  window.removeEventListener("pointermove", onMove);
+  window.removeEventListener("pointerdown", onMove);
+  window.removeEventListener("touchmove", onTouch);
+  window.removeEventListener("pointerleave", onPointerLeave);
+  window.removeEventListener("resize", onResize);
+  document.removeEventListener("visibilitychange", onVisibilityChange);
+  window.removeEventListener("pagehide", onPageHide);
+  window.removeEventListener("pageshow", onPageShow);
+  canvas?.removeEventListener("webglcontextlost", onContextLost);
+  canvas?.removeEventListener("webglcontextrestored", onContextRestored);
+}
+
 export function init(container, imageSource) {
-  if (animId) destroy();
+  if (canvas || gl || animId) destroy();
 
   const pageColor =
     getComputedStyle(document.body).getPropertyValue("--c-bg").trim() ||
@@ -428,19 +595,17 @@ export function init(container, imageSource) {
     return false;
   }
 
+  bindStaticUniforms();
   if (imageSource instanceof HTMLCanvasElement) {
+    currentCanvasSource = imageSource;
+    currentSourceUrl = "";
     setHeroSource(imageSource);
   } else if (typeof imageSource === "string") {
     loadImageUrl(imageSource);
   }
 
-  window.addEventListener("pointermove", onMove, { passive: true });
-  window.addEventListener("pointerdown", onMove, { passive: true });
-  window.addEventListener("touchmove", onTouch, { passive: true });
-  window.addEventListener("pointerleave", onPointerLeave);
-  window.addEventListener("resize", onResize);
-
-  loop();
+  bindListeners();
+  startLoop();
   return true;
 }
 
@@ -448,7 +613,9 @@ export function setBackgroundColor(color) {
   const resolved = color?.trim() || DEFAULT_BG;
   setClearColorFromHex(resolved);
   if (!gl) return;
-  setHeroSource(createBackgroundCanvas(resolved));
+  currentCanvasSource = createBackgroundCanvas(resolved);
+  currentSourceUrl = "";
+  setHeroSource(currentCanvasSource);
 }
 
 /** Load a hero image URL and sync letterbox clear color to a CSS color. */
@@ -462,6 +629,8 @@ export function setBackgroundImage(imageUrl, clearColorHex) {
 export function switchToImage(imageUrl) {
   if (!gl) return;
   if (imageUrl instanceof HTMLCanvasElement) {
+    currentCanvasSource = imageUrl;
+    currentSourceUrl = "";
     setHeroSource(imageUrl);
     return;
   }
@@ -469,32 +638,16 @@ export function switchToImage(imageUrl) {
 }
 
 export function destroy() {
-  if (animId) cancelAnimationFrame(animId);
-  animId = null;
-
-  window.removeEventListener("pointermove", onMove);
-  window.removeEventListener("pointerdown", onMove);
-  window.removeEventListener("touchmove", onTouch);
-  window.removeEventListener("pointerleave", onPointerLeave);
-  window.removeEventListener("resize", onResize);
-
+  stopLoop();
+  imageToken += 1;
+  unbindListeners();
+  releaseGpu(Boolean(gl));
   if (canvas) canvas.remove();
-
-  if (gl) {
-    fb.forEach((f) => {
-      if (f) {
-        gl.deleteFramebuffer(f.f);
-        gl.deleteTexture(f.t);
-      }
-    });
-    if (heroTex) gl.deleteTexture(heroTex);
-  }
-
   canvas = null;
   gl = null;
-  heroTex = null;
-  fb = [null, null];
   cur = 0;
   frame = 0;
-  mouse.x = -1;
+  currentSourceUrl = "";
+  currentCanvasSource = null;
+  resetPointer();
 }

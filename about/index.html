@@ -90,13 +90,6 @@
       ]
     }
     </script>
-        <script type="importmap">
-        {
-            "imports": {
-                "lenis": "/public/vendor/lenis.mjs"
-            }
-        }
-    </script>
 </head>
 <body class="portfolio-page about-page">
     <nav class="nav-side">
@@ -131,8 +124,9 @@
 
     <div id="smooth-wrapper">
         <div id="smooth-content">
+            <main>
             <section class="portfolio-intro">
-                <p class="portfolio-intro__title">About</p>
+                <h1 class="portfolio-intro__title">About</h1>
             </section>
 
             <section class="about-content">
@@ -140,16 +134,19 @@
                     <figure class="about-headshot">
                         <div class="about-headshot__frame">
                             <div class="about-headshot__media">
+                                <!-- generated-headshot:start -->
                                 <img
-                                    class="img-reveal"
-                                    src="/public/images/zee-headshot-720.webp"
-                                    srcset="/public/images/zee-headshot-720.webp 720w, /public/images/zee-headshot-1400.webp 1400w"
-                                    sizes="(max-width: 768px) 220px, 280px"
                                     alt="Zee Pauli"
-                                    width="600"
-                                    height="750"
+                                    width="1050"
+                                    height="1400"
+                                    sizes="(max-width: 480px) min(280px, calc(100vw - 8vw)), (max-width: 768px) 220px, 280px"
+                                    srcset="/public/images/zee-headshot-w360-91f460fa20f9.webp 360w, /public/images/zee-headshot-720.webp 540w, /public/images/zee-headshot-1400.webp 1050w"
+                                    src="/public/images/zee-headshot-720.webp"
                                     decoding="async"
+                                    loading="eager"
+                                    fetchpriority="high"
                                 >
+                                <!-- generated-headshot:end -->
                             </div>
                         </div>
                     </figure>
@@ -209,6 +206,7 @@
                     </div>
                 </div>
             </section>
+            </main>
         </div>
     </div>
 

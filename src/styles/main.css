@@ -81,6 +81,8 @@
 
 html {
     font-size: 80%;
+    /* 11px at the 80% root. Apple's published text minimum; still scales with the browser default. */
+    --type-min: 0.859375rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
     overflow-x: hidden;
@@ -208,7 +210,7 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
     font-family: var(--font-mono);
     font-weight: 800;
     letter-spacing: 0.15em;
-    font-size: 0.85rem;
+    font-size: var(--type-min);
     color: var(--c-text);
 }
 
@@ -376,7 +378,7 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
     font-family: var(--font-mono);
     font-weight: 800;
     letter-spacing: 0.15em;
-    font-size: 0.85rem;
+    font-size: var(--type-min);
     color: var(--c-text);
     text-decoration: none;
     transition: opacity 0.2s ease;
@@ -409,7 +411,7 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
 /* Section Labels */
 .sec-label {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: var(--type-min);
     text-transform: uppercase;
     letter-spacing: 0.18em;
     color: var(--c-sub);

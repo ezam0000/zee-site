@@ -4,9 +4,12 @@
   "description": "Zee Design Studio Website",
   "type": "module",
   "scripts": {
+    "prestart": "node scripts/build-site.mjs",
+    "predev": "node scripts/build-site.mjs",
     "start": "npx serve . -p 3000 --cors",
     "dev": "npx serve . -p 3000 --cors",
-    "build": "echo 'No build step needed - static site'",
+    "build": "node scripts/build-site.mjs",
+    "build:check": "node scripts/build-site.mjs --check",
     "test": "playwright test",
     "images:optimize": "node scripts/optimize-images.mjs",
     "version:update": "node update-version.js",

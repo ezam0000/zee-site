@@ -65,9 +65,11 @@ body.home-page {
 
 body.home-page #smooth-wrapper,
 body.home-page #smooth-content {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     height: 100%;
     height: 100dvh;
+    -webkit-overflow-scrolling: touch;
 }
 
 body.home-page .hero-sec {

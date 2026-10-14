@@ -129,7 +129,7 @@ body.portfolio-page .logo-link:active {
     margin: auto 0 0;
     padding-top: 3rem;
     font-family: var(--font-sans);
-    font-size: 0.8125rem;
+    font-size: var(--type-min);
     line-height: 1.7;
     color: var(--c-text);
 }
@@ -201,7 +201,7 @@ body.portfolio-page .logo-link:active {
 
 .about-services__list li {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: var(--type-min);
     font-weight: 400;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -220,6 +220,15 @@ body.portfolio-page .logo-link:active {
     align-items: start;
 }
 
+.portfolio-intro__body,
+.about-content__text,
+.portfolio-tile__description,
+.portfolio-modal__description,
+.portfolio-modal__body {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+}
+
 .portfolio-tile {
     display: flex;
     flex-direction: column;
@@ -230,6 +239,7 @@ body.portfolio-page .logo-link:active {
     border: 0;
     background: none;
     text-align: left;
+    text-decoration: none;
     cursor: pointer;
     font: inherit;
     color: inherit;
@@ -273,7 +283,8 @@ body.portfolio-page .logo-link:active {
     pointer-events: none;
 }
 
-.portfolio-tile__frame:focus-within .portfolio-tile__overlay {
+.portfolio-tile:focus-visible .portfolio-tile__overlay,
+.portfolio-tile:focus-within .portfolio-tile__overlay {
     opacity: 1;
 }
 
@@ -286,7 +297,7 @@ body.portfolio-page .logo-link:active {
     margin-top: 0.85rem;
     margin-bottom: 0;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: var(--type-min);
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -322,7 +333,7 @@ body.portfolio-page .logo-link:active {
     display: block;
     margin-top: 0.85rem;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: var(--type-min);
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -404,7 +415,7 @@ body.portfolio-page .logo-link:active {
 .portfolio-hero__brand {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: var(--type-min);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--c-sub);
@@ -454,13 +465,21 @@ body.portfolio-page .logo-link:active {
     }
 
     .portfolio-tile__details--mobile .portfolio-tile__description {
-        font-size: 0.82rem;
+        font-size: var(--type-min);
         line-height: 1.5;
+    }
+
+    .about-headshot {
+        margin-inline: auto;
     }
 
     .about-content__layout {
         grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
         gap: 1.5rem;
+    }
+
+    .portfolio-tile__media img {
+        object-position: center center;
     }
 
     .about-services__groups {
@@ -470,7 +489,7 @@ body.portfolio-page .logo-link:active {
     }
 
     .about-services__list li {
-        font-size: 0.75rem;
+        font-size: var(--type-min);
     }
 }
 
@@ -485,6 +504,7 @@ body.portfolio-page .logo-link:active {
 
     .about-headshot {
         max-width: 280px;
+        margin-inline: auto;
     }
 
     .about-services__groups {
@@ -493,14 +513,33 @@ body.portfolio-page .logo-link:active {
     }
 }
 
-body.portfolio-modal-open {
+body.portfolio-modal-open,
+body[data-portfolio-entry="project"]:not(.is-portfolio-enhanced) {
     overflow: hidden;
 }
 
 .portfolio-modal {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
     position: fixed;
     inset: 0;
     z-index: 200;
+}
+
+.portfolio-modal:not([open]) {
+    display: none;
+}
+
+.portfolio-modal[open],
+.portfolio-fallback {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -509,18 +548,49 @@ body.portfolio-modal-open {
         max(1.5rem, var(--safe-right))
         max(1.5rem, var(--safe-bottom))
         max(1.5rem, var(--safe-left));
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-        opacity 0.2s ease-out,
-        visibility 0.2s ease-out;
 }
 
-.portfolio-modal.is-open {
+.portfolio-modal[open] {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+}
+
+.portfolio-modal[open].is-open {
     opacity: 1;
-    visibility: visible;
     pointer-events: auto;
+}
+
+.portfolio-modal::backdrop {
+    background: transparent;
+}
+
+.portfolio-fallback {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: transparent;
+}
+
+.portfolio-fallback__work {
+    position: absolute;
+    z-index: 3;
+    top: max(1rem, var(--safe-top));
+    left: max(1rem, var(--safe-left));
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.75rem;
+    color: var(--c-text);
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: var(--type-min);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
 .portfolio-modal__backdrop {
@@ -542,7 +612,7 @@ body.portfolio-modal-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .portfolio-modal {
+    .portfolio-modal[open] {
         transition: none;
     }
 }
@@ -632,7 +702,7 @@ body.portfolio-modal-open {
     padding-top: 2rem;
     padding-right: 2.5rem;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: var(--type-min);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--c-sub);
@@ -666,9 +736,19 @@ body.portfolio-modal-open {
 }
 
 @media (max-width: 900px) {
-    .portfolio-modal {
+    .portfolio-modal[open],
+    .portfolio-fallback {
         padding: 0;
         align-items: stretch;
+    }
+
+    .portfolio-modal__figure,
+    .portfolio-modal__media {
+        margin-inline: auto;
+    }
+
+    .portfolio-modal__image {
+        object-position: center center;
     }
 
     .portfolio-modal__dialog {
@@ -722,7 +802,7 @@ body.portfolio-modal-open {
 
 .contact-form__field label {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: var(--type-min);
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -751,7 +831,7 @@ body.portfolio-modal-open {
     background: transparent;
     color: inherit;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: var(--type-min);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;

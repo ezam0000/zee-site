@@ -31,11 +31,14 @@ export function initSmoothScroll({ desktopOnly = false } = {}) {
     return lenisPromise;
   }
 
-  lenisPromise = import("lenis")
+  lenisPromise = import("/public/vendor/lenis.mjs")
     .then((module) => {
       const Lenis = module.default || module.Lenis || module;
       const lenis = new Lenis({ ...DEFAULT_OPTIONS });
       lenisInstance = lenis;
+      if (document.body.classList.contains("portfolio-modal-open")) {
+        lenis.stop();
+      }
 
       function raf(time) {
         lenis.raf(time);

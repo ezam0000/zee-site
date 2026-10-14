@@ -4,6 +4,7 @@ import { initSmoothScroll } from './core/smooth-scroll.js';
 import { initPageTransitions } from './core/transitions.js';
 import {
     init as initHeroLiquid,
+    destroy as destroyHeroLiquid,
     setBackgroundImage as setHeroLiquidBackground,
 } from './effects/heroLiquid.js';
 import { initFloatingLeaf } from './effects/floatingLeaf.js';
@@ -62,6 +63,22 @@ function bootHeroLiquid() {
     heroLiquidActive = initHeroLiquid(heroLiquidContainer, imageUrl);
 }
 requestAnimationFrame(() => requestAnimationFrame(bootHeroLiquid));
+
+const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+motionMedia.addEventListener('change', () => {
+    if (!heroLiquidContainer) return;
+    if (motionMedia.matches) {
+        if (heroLiquidActive) {
+            destroyHeroLiquid();
+            heroLiquidActive = false;
+        }
+        applyHeroLiquidFallback(getHeroLiquidImageUrl());
+        return;
+    }
+    if (!heroLiquidActive) {
+        heroLiquidActive = initHeroLiquid(heroLiquidContainer, getHeroLiquidImageUrl());
+    }
+});
 
 // Initialize theme switch (kept for when the control is shown again)
 if (themeToggle) {

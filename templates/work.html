@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    __HEAD__
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Zee Pauli">
+    <meta name="theme-color" content="#F3F2EF">
+    <link rel="icon" href="/public/favicon.ico" sizes="any">
+    <link rel="icon" href="/public/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+    <link rel="stylesheet" href="/src/styles/main.css?v=1.0.2">
+    <link rel="stylesheet" href="/src/styles/desktop.css?v=1.0.0" media="(min-width: 769px)">
+    <link rel="stylesheet" href="/src/styles/mobile.css?v=1.0.0" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/src/styles/portfolio.css?v=1.0.2">
+    __JSONLD__
+</head>
+<body class="portfolio-page" __BODY_ATTRS__>
+    <nav class="nav-side">
+        <div class="nav-brand">
+            <a href="/" class="logo-link">
+                <div class="logo-vert">Zee Pauli</div>
+            </a>
+        </div>
+        <div class="nav-social">
+                <a class="nav-social__link" href="https://www.linkedin.com/in/zee-studio" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-13h4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </a>
+                <a class="nav-social__link" href="https://www.instagram.com/zee.24" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                    </svg>
+                </a>
+                <a class="nav-social__link" href="mailto:zee.pauli@outlook.com" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+        </div>
+    </nav>
+
+    <main id="page-main">
+        <div id="work-shell" __WORK_SHELL_ATTRS__>
+            <div id="smooth-wrapper">
+                <div id="smooth-content">
+                    <section class="portfolio-intro">
+                        <h1 class="portfolio-intro__title">Work</h1>
+                        <p class="portfolio-intro__body">Selected work across branding, packaging,<br>and experience design.</p>
+                    </section>
+
+                    <div class="portfolio-grid" id="portfolio-stack">
+__CARDS__
+                    </div>
+                </div>
+            </div>
+        </div>
+__FALLBACK__
+        <dialog class="portfolio-modal" id="portfolio-modal" aria-labelledby="portfolio-modal-title">
+            <div class="portfolio-modal__backdrop" data-modal-close></div>
+            <div class="portfolio-modal__dialog" id="portfolio-modal-panel">
+                <button type="button" class="portfolio-modal__close" aria-label="Close project gallery">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </dialog>
+    </main>
+
+    <script type="module" src="/src/pages/portfolio.js?v=1.0.2"></script>
+</body>
+</html>
