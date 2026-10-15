@@ -7,7 +7,7 @@ const PERSON = {
     url: `${SITE_ORIGIN}/`,
     image: `${SITE_ORIGIN}/public/images/zee-headshot-1400.webp`,
     email: 'mailto:zee.pauli@outlook.com',
-    jobTitle: 'Senior Designer',
+    jobTitle: 'Designer',
     description: 'Designer working in branding, packaging, and art direction for cannabis, spirits, and consumer brands. Currently at Wyld. Based in Portland, OR.',
     worksFor: {
         '@type': 'Organization',

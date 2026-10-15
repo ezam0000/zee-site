@@ -1,17 +1,25 @@
 /* Desktop Styles - Only loaded on screens wider than 768px */
 
+:root {
+    --nav-bar: max(var(--nav-width), calc(44px + var(--safe-left)));
+}
+
 /* Desktop Navigation */
 .nav-side {
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
-    width: var(--nav-width);
+    width: var(--nav-bar);
+    padding:
+        max(var(--nav-pad-y), var(--safe-top))
+        0
+        max(var(--nav-pad-y), var(--safe-bottom))
+        var(--safe-left);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: var(--nav-pad-y) 0;
     z-index: 10;
     border-right: 1px solid var(--c-line);
     background: var(--nav-surface);
@@ -27,7 +35,7 @@
 
 /* Desktop Hero */
 .hero-sec {
-    padding-left: calc(var(--nav-width) + var(--pad) * 1.5);
+    padding-left: calc(var(--nav-bar) + var(--pad) * 1.5);
 }
 
 .hero-main {
@@ -40,5 +48,13 @@
 
 .headline__swap {
     --headline-word-indent: 5vw;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .nav-side {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        background: var(--nav-surface);
+    }
 }
 

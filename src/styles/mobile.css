@@ -37,7 +37,14 @@ body.home-page #hero-liquid {
 }
 
 .nav-brand {
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
 }
 
 .nav-social {
@@ -52,6 +59,8 @@ body.home-page #hero-liquid {
 
 .logo-vert {
     writing-mode: horizontal-tb;
+    font-size: calc(var(--type-min) * 1.44);
+    line-height: 1;
 }
 
 /* Mobile Hero */
@@ -82,7 +91,7 @@ body.home-page .hero-sec {
 
 body.home-page .hero-sticky {
     align-items: center;
-    padding-top: calc(60px + var(--safe-top));
+    padding-top: calc(60px + var(--safe-top) + 4rem);
     padding-bottom: var(--safe-bottom);
     box-sizing: border-box;
 }
@@ -105,8 +114,8 @@ body.home-page .hero-headlines {
     text-align: center;
 }
 
-.headline__static {
-    text-align: center;
+body.home-page .headline__static {
+    font-size: 0.8em;
 }
 
 body.home-page .headline--hero {
@@ -145,7 +154,9 @@ body.home-page .headline__word {
 }
 
 body.home-page .hero-portfolio-links {
-    margin-top: 7rem;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 10rem;
     left: 0;
     margin-left: 0;
     width: 100%;
@@ -157,5 +168,7 @@ body.home-page .hero-portfolio-links {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    font-size: calc(var(--type-min) * 1.44);
 }
 

@@ -71,15 +71,11 @@
 
 * { 
     box-sizing: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
 }
 
 html {
+    color-scheme: light;
     font-size: 80%;
     /* 11px at the 80% root. Apple's published text minimum; still scales with the browser default. */
     --type-min: 0.859375rem;
@@ -107,14 +103,11 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-/* Allow text selection in form inputs and textareas */
-input,
+/* 16px keeps iOS from zooming the page when a field is focused. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="reset"]),
 textarea,
-[contenteditable] {
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
+select {
+    font-size: max(1rem, 16px);
 }
 
 /* Japanese Grid Overlay */
@@ -271,6 +264,7 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
 /* Hero Section - Base styles */
 .hero-sec {
     min-height: 80vh;
+    min-height: 80dvh;
     padding: 0 var(--pad);
     display: flex;
     flex-direction: column;
@@ -575,6 +569,52 @@ body:not(.dark-mode) #hero-liquid .hero-liquid-canvas {
     .theme-switch-container {
         top: 80px;
         right: 16px;
+    }
+}
+
+@media (pointer: coarse) {
+    .logo-link,
+    .hero-portfolio-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .nav-social__link {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --c-text: #1A1A1A;
+        --c-sub: #333333;
+        --c-line: rgba(0, 0, 0, 0.45);
+    }
+
+    .nav-social__link {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .nav-side,
+    .portfolio-modal__backdrop,
+    .portfolio-tile__overlay,
+    .portfolio-fallback__work,
+    .portfolio-modal__close {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .portfolio-modal__backdrop,
+    .portfolio-tile__overlay,
+    .portfolio-fallback__work,
+    .portfolio-modal__close {
+        background: #FFFFFF;
     }
 }
 
