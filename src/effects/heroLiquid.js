@@ -338,9 +338,10 @@ function loop() {
     const interval = intro ? INTRO_INTERVAL : AMBIENT_INTERVAL;
     // Seed a few drops immediately so motion is visible on first paint.
     if (frame === 1 || frame === 4 || frame === 9 || frame % interval === 0) {
+      const mobile = window.matchMedia("(max-width: 768px)").matches;
       const drop = ambientDrop(
-        intro ? 0.045 : 0.028,
-        intro ? 0.0045 : 0.0055
+        intro ? (mobile ? 0.064 : 0.045) : 0.028,
+        intro ? (mobile ? 0.0052 : 0.0045) : 0.0055
       );
       dx = drop.x;
       dy = drop.y;
