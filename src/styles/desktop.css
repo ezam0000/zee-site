@@ -50,6 +50,16 @@
     --headline-word-indent: 5vw;
 }
 
+@media (max-width: 1366px) {
+    .headline {
+        font-size: clamp(7rem, 13.5vw, 10.35rem);
+    }
+
+    .hero-portfolio-link {
+        font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+    }
+}
+
 @media (prefers-reduced-transparency: reduce) {
     .nav-side {
         -webkit-backdrop-filter: none;

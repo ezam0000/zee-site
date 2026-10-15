@@ -146,7 +146,7 @@ body.home-page .headline__word {
 }
 
 .headline {
-    font-size: clamp(4.89rem, 12.88vw, 6.325rem);
+    font-size: clamp(4.89rem, 14vw, 9rem);
 }
 
 .headline .indent {
@@ -169,6 +169,6 @@ body.home-page .hero-portfolio-links {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(var(--type-min) * 1.44);
+    font-size: clamp(calc(var(--type-min) * 1.44), 2.6vw, 1.5rem);
 }
 

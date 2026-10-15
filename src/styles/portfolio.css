@@ -887,6 +887,8 @@ body[data-portfolio-entry="project"]:not(.is-portfolio-enhanced) {
     }
 
     .portfolio-modal__layout {
+        --project-inline-start: max(var(--pad), var(--safe-left));
+        --project-inline-end: max(var(--pad), var(--safe-right));
         display: flex;
         flex-direction: column;
         height: auto;
@@ -904,23 +906,23 @@ body[data-portfolio-entry="project"]:not(.is-portfolio-enhanced) {
             max(3.5rem, calc(var(--safe-top) + 2.75rem))
             max(4.5rem, calc(var(--safe-right) + 3.25rem))
             1rem
-            max(1.5rem, var(--safe-left));
+            var(--project-inline-start);
     }
 
     .portfolio-modal__description {
         order: 2;
         font-size: 1.25rem;
         margin-bottom: 0;
-        margin-left: max(1.5rem, var(--safe-left));
-        margin-right: max(1.5rem, var(--safe-right));
+        margin-left: var(--project-inline-start);
+        margin-right: var(--project-inline-end);
     }
 
     .portfolio-modal__meta {
         order: 3;
         font-size: var(--type-min);
         margin-top: 0.75rem;
-        margin-left: max(1.5rem, var(--safe-left));
-        margin-right: max(1.5rem, var(--safe-right));
+        margin-left: var(--project-inline-start);
+        margin-right: var(--project-inline-end);
         margin-bottom: 2rem;
         padding-top: 0;
         padding-right: 0;
@@ -930,7 +932,7 @@ body[data-portfolio-entry="project"]:not(.is-portfolio-enhanced) {
         order: 4;
         height: auto;
         overflow: visible;
-        padding: 0 var(--pad);
+        padding: 0 var(--project-inline-end) 0 var(--project-inline-start);
         gap: 1rem;
     }
 
@@ -947,8 +949,8 @@ body[data-portfolio-entry="project"]:not(.is-portfolio-enhanced) {
         order: 5;
         font-size: 1.25rem;
         margin-top: 1.5rem;
-        margin-left: max(1.5rem, var(--safe-left));
-        margin-right: max(1.5rem, var(--safe-right));
+        margin-left: var(--project-inline-start);
+        margin-right: var(--project-inline-end);
         margin-bottom: max(2.5rem, var(--safe-bottom));
     }
 }
