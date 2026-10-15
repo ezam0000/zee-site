@@ -1,5 +1,6 @@
 import { PROJECTS, getProjectBySlug } from '../data/projects.js';
 import { TILE_SIZES } from '../data/image-layout.js';
+import { fillSeparatedMeta } from '../utils/dom.js';
 import { applyResponsiveImage, sizedImage } from '../utils/images.js';
 import { initPortfolioModal, showPortfolioProject } from './PortfolioModal.js';
 
@@ -21,7 +22,7 @@ function detailsElement(project, modifier = '') {
 
     const meta = document.createElement('span');
     meta.className = 'portfolio-tile__meta';
-    meta.textContent = project.meta;
+    fillSeparatedMeta(meta, project.meta);
 
     details.append(title, description, meta);
     return details;

@@ -13,6 +13,18 @@ export function createElement(tag, className, content) {
   return el;
 }
 
+const META_SEPARATOR = ' · ';
+
+export function fillSeparatedMeta(element, meta) {
+  const phrases = String(meta).split(META_SEPARATOR).filter(Boolean);
+  element.replaceChildren();
+  phrases.forEach((phrase) => {
+    const item = document.createElement('span');
+    item.textContent = phrase;
+    element.append(item);
+  });
+}
+
 export function addClass(el, className) {
   if (el) el.classList.add(className);
 }

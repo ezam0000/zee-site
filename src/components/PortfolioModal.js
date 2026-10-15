@@ -2,6 +2,7 @@ import { applyPageMeta, projectMetaState, workMetaState } from '../core/page-met
 import { startSmoothScroll, stopSmoothScroll } from '../core/smooth-scroll.js';
 import { getProjectBySlug as lookupProject } from '../data/projects.js';
 import { GALLERY_SIZES } from '../data/image-layout.js';
+import { fillSeparatedMeta } from '../utils/dom.js';
 import { applyResponsiveImage, sizedImage } from '../utils/images.js';
 
 const WORK = '/public/images/work';
@@ -163,7 +164,7 @@ function renderDetails(project) {
 
     const meta = document.createElement('span');
     meta.className = 'portfolio-modal__meta';
-    meta.textContent = project.meta;
+    fillSeparatedMeta(meta, project.meta);
 
     content.append(title, description, body, meta);
     return content;

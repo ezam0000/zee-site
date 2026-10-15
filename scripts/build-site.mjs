@@ -32,6 +32,14 @@ function escapeHtml(value) {
         .replaceAll('"', '&quot;');
 }
 
+function metaHtml(meta) {
+    return String(meta)
+        .split(' · ')
+        .filter(Boolean)
+        .map((phrase) => `<span>${escapeHtml(phrase)}</span>`)
+        .join('');
+}
+
 function escapeXml(value) {
     return escapeHtml(value);
 }
@@ -247,7 +255,7 @@ function detailsHtml(project, heading, modifier = '') {
     return `<div class="${classes}">
                             <${heading} class="portfolio-tile__title">${escapeHtml(project.title)}</${heading}>
                             <p class="portfolio-tile__description">${escapeHtml(project.description)}</p>
-                            <span class="portfolio-tile__meta">${escapeHtml(project.meta)}</span>
+                            <span class="portfolio-tile__meta">${metaHtml(project.meta)}</span>
                         </div>`;
 }
 
@@ -321,7 +329,7 @@ ${figures}
                         <h1 class="portfolio-modal__title" id="portfolio-modal-title">${escapeHtml(project.title)}</h1>
                         <p class="portfolio-modal__description">${escapeHtml(project.description)}</p>
                         <p class="portfolio-modal__body">${escapeHtml(project.details)}</p>
-                        <span class="portfolio-modal__meta">${escapeHtml(project.meta)}</span>
+                        <span class="portfolio-modal__meta">${metaHtml(project.meta)}</span>
                     </aside>
                 </div>
             </div>

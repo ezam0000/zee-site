@@ -308,6 +308,7 @@ body.portfolio-page .logo-link:active {
     color: var(--c-sub);
 }
 
+
 .portfolio-tile__title {
     margin: 0 0 0.75rem;
     font-family: var(--font-serif);
@@ -790,6 +791,43 @@ body[data-portfolio-entry="project"]:not(.is-portfolio-enhanced) {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--c-sub);
+}
+
+.portfolio-tile__meta span,
+.portfolio-modal__meta span {
+    display: inline;
+}
+
+.portfolio-tile__meta span:not(:last-child)::after,
+.portfolio-modal__meta span:not(:last-child)::after {
+    content: " · ";
+}
+
+@media (max-width: 768px) {
+    /* The dot hangs outside each phrase so it cannot push the next phrase down. */
+    .portfolio-tile__meta,
+    .portfolio-modal__meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        column-gap: 1.25em;
+        min-width: 0;
+    }
+
+    .portfolio-tile__meta span,
+    .portfolio-modal__meta span {
+        position: relative;
+        white-space: nowrap;
+    }
+
+    .portfolio-tile__meta span:not(:last-child)::after,
+    .portfolio-modal__meta span:not(:last-child)::after {
+        content: "·";
+        position: absolute;
+        left: calc(100% + 0.32em);
+        top: 0;
+        letter-spacing: 0;
+    }
 }
 
 .portfolio-modal__title {
