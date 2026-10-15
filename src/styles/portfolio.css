@@ -446,6 +446,19 @@ body.portfolio-page .logo-link:active {
         --pad: 6vw;
     }
 
+    /* iOS paints the status bar from the html canvas, not the fixed nav. */
+    html:has(body.portfolio-page) {
+        background-color: #FFFFFF;
+    }
+
+    body.portfolio-page .nav-side {
+        top: 0;
+        background-color: #FFFFFF;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        box-shadow: 0 -100vh 0 0 #FFFFFF;
+    }
+
     .portfolio-intro {
         padding-top: calc(60px + 2rem + var(--safe-top));
     }
@@ -699,6 +712,11 @@ body[data-portfolio-entry="project"]:not(.is-portfolio-enhanced) {
     font-size: 1.5rem;
     line-height: 1;
     cursor: pointer;
+}
+
+.portfolio-modal__close:focus,
+.portfolio-modal__close:focus-visible {
+    outline: none;
 }
 
 .portfolio-modal__close:active {
